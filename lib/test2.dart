@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter_app/main.dart';
 
 /// list 列表 菜单列表
 // ignore: must_be_immutable
@@ -41,25 +42,28 @@ class RandomWordsState extends State<RandomWords> {
       padding: const EdgeInsets.all(16.0),
       itemBuilder: (context, i) {
         if (i.isOdd) return new Divider();
-        final  index = i ~/2;
+        final index = i ~/ 2;
         return _buildRow(list[index]);
       },
-      itemCount: list.length*2,
+      itemCount: list.length * 2,
     );
   }
-void _toNextPahe
+
+  ///跳转到下一页
+  void _toNextPage() {
+    Navigator.push(
+      context,
+      new MaterialPageRoute(builder: (context) => new MyApp()),
+    );
+  }
+
   Widget _buildRow(String pair) {
     return new ListTile(
       title: new Text(
         pair,
         style: _biggerFont,
       ),
-      onTap: setState(() {
-        Navigator.push(
-          context,
-          new MaterialPageRoute(builder: (context) => new SecondScreen()),
-        )
-      }) ; ,
+      onTap: _toNextPage,
     );
   }
 }
