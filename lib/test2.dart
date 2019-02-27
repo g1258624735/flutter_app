@@ -50,10 +50,16 @@ class RandomWordsState extends State<RandomWords> {
   }
 
   ///跳转到下一页
-  void _toNextPage() {
+   void _toNextPage() {
     Navigator.push(
       context,
-      new MaterialPageRoute(builder: (context) => new MyApp()),
+      new MaterialPageRoute(builder: (context) {
+//        if (0 != 0) {
+//         return new MyApp();
+//        }else if(1 == 1){
+         return new Main2App();
+//        }
+      } ),
     );
   }
 
