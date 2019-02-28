@@ -1,75 +1,153 @@
 // Step 4: Create an infinite scrolling lazily loaded list
 
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
-import 'package:flutter_app/main.dart';
+import 'package:transparent_image/transparent_image.dart';
 
-/// list 列表 菜单列表
-// ignore: must_be_immutable
-class Test2MyApp extends StatelessWidget {
+/// 以App 结尾的都是单独作为界面的 ； 以 widget 结尾的都只是单独的界面布局
+class Test2App extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Startup Name Generator',
-      theme: new ThemeData(primarySwatch: Colors.blueGrey),
-      home: new RandomWords(),
+      title: 'Flutter Demo',
+      theme: new ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      home: new Scaffold(
+        //Scaffold是Material中主要的布局组件.
+        appBar: new AppBar(
+          actions: <Widget>[
+            new RaisedButton(
+                onPressed: () {
+                  // Navigate back to first screen when tapped!
+                  Navigator.pop(context);
+                },
+                child: new Text('Go back!')),
+            new RaisedButton(
+                onPressed: () {
+                  // Navigate back to first screen when tapped!
+                  Navigator.pop(context);
+                },
+                child: new Text('返回'))
+          ],
+          title: new Text("welcome to android"),
+        ),
+        body: new Center(
+//          child: new Text("你好，欢迎来到安卓!"),
+          child: new Test2Widget2(),
+        ),
+      ),
     );
   }
 }
 
-class RandomWords extends StatefulWidget {
-  @override
-  createState() => new RandomWordsState();
-}
-
-class RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-  final List<String> list = ["简单的UI控件测试demo", "简单的UI控件测试demo2"];
-  final TextStyle _biggerFont = new TextStyle(fontSize: 18.0);
-
-  @override
+class Test2Widget extends StatelessWidget {
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Flutter测试'),
+    return new Container(
+      height: 56.0,
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      decoration: new BoxDecoration(color: Colors.blue[500]),
+      child: new Row(
+        children: <Widget>[
+          new IconButton(
+              icon: new Icon(Icons.menu), tooltip: "菜单", onPressed: null),
+//          new Expanded(child: new ),
+          new IconButton(
+              icon: new Icon(Icons.search), tooltip: "搜索", onPressed: null)
+        ],
       ),
-      body: _buildSuggestions(),
     );
   }
+}
 
-  Widget _buildSuggestions() {
-    return new ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      itemBuilder: (context, i) {
-        if (i.isOdd) return new Divider();
-        final index = i ~/ 2;
-        return _buildRow(list[index]);
-      },
-      itemCount: list.length * 2,
-    );
+class Test2Widget2 extends StatefulWidget {
+  @override
+  _CountState createState() => new _CountState();
+}
+
+/// 可以记录状态的 View  widget 是一种临时变量 view
+class _CountState extends State<Test2Widget2> {
+  int _count = 0;
+
+  void _increment() {
+    setState(() {
+      _count++;
+    });
   }
 
-  ///跳转到下一页
-   void _toNextPage() {
-    Navigator.push(
-      context,
-      new MaterialPageRoute(builder: (context) {
-//        if (0 != 0) {
-//         return new MyApp();
-//        }else if(1 == 1){
-         return new Main2App();
-//        }
-      } ),
-    );
-  }
-
-  Widget _buildRow(String pair) {
-    return new ListTile(
-      title: new Text(
-        pair,
-        style: _biggerFont,
+  Widget build(BuildContext context) {
+    return new Material(
+      child: new Column(
+        children: <Widget>[
+          new Test2Widget(),
+          new Stack(
+            children: <Widget>[new Text("test1我是则帧布局"), new Text("tex2我是则帧布局")],
+          ),
+          new Text("数量：$_count"),
+          new RaisedButton(
+            onPressed: () {
+              _increment();
+              final snackBar = new SnackBar(content: new Text("点击事件"));
+              Scaffold.of(context).showSnackBar(snackBar);
+            },
+            child: new Text("点我增加"),
+          ),
+          new FadeInImage.memoryNetwork(
+              placeholder: kTransparentImage,
+              image:
+                  "http://01imgmini.eastday.com/mobile/20190227/2019022716_4160ed1c7126425e83f030c31f90f59a_4414_wmk.jpg"),
+          new Text("水平listView"),
+          new Container(
+            margin: new EdgeInsets.symmetric(vertical: 20.0),
+            height: 200.0,
+            child: new ListView(
+              //水平listView
+              // This next line does the trick.
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                new Container(
+                  width: 60.0,
+                  color: Colors.red,
+                ),
+                new Container(
+                  width: 60.0,
+                  color: Colors.blue,
+                ),
+                new Container(
+                  width: 60.0,
+                  color: Colors.green,
+                ),
+                new Container(
+                  width: 60.0,
+                  height: 20.0,
+                  color: Colors.yellow,
+                ),
+                new Container(
+                  width: 60.0,
+                  color: Colors.orange,
+                ),
+              ],
+            ),
+          ),
+          new Text("GridView"),
+          new Container(
+              margin: new EdgeInsets.symmetric(vertical: 20.0),
+              height: 200.0,
+              child: new GridView.count(
+                crossAxisCount: 2,
+                children: new List.generate(10, (index) {
+                  return new Center(
+                    child: new Text("Item $index"),
+                  );
+                }),
+              )),
+          new Expanded(
+              child: new Center(
+            // Expanded 剩下的填充布局。
+            child: new Text("你好我是测试！"),
+          ))
+        ],
       ),
-      onTap: _toNextPage,
     );
   }
 }
