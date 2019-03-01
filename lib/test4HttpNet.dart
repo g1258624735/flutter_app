@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 /// 以App 结尾的都是单独作为界面的 ； 以 widget 结尾的都只是单独的界面布局
+///  本类重点测试 网络请求功能。
 class Test2App extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -17,12 +18,6 @@ class Test2App extends StatelessWidget {
         //Scaffold是Material中主要的布局组件.
         appBar: new AppBar(
           actions: <Widget>[
-            new RaisedButton(
-                onPressed: () {
-                  // Navigate back to first screen when tapped!
-                  Navigator.pop(context);
-                },
-                child: new Text('Go back!')),
             new RaisedButton(
                 onPressed: () {
                   // Navigate back to first screen when tapped!
@@ -60,6 +55,20 @@ class Test2Widget extends StatelessWidget {
   }
 }
 
+class PostBean {
+  final int userId;
+  final int id;
+  final String title;
+  final String body;
+
+  PostBean(this.userId, this.id, this.title, this.body);
+
+  factory PostBean.fromJson(Map<String, dynamic> json) {
+    return new PostBean(
+        json["userId"], json["is"], json["title"], json["body"]);
+  }
+}
+
 class Test2Widget2 extends StatefulWidget {
   @override
   _CountState createState() => new _CountState();
@@ -73,6 +82,10 @@ class _CountState extends State<Test2Widget2> {
     setState(() {
       _count++;
     });
+  }
+
+  Future<PostBean> fetchPost() async {
+
   }
 
   Widget build(BuildContext context) {
@@ -94,60 +107,6 @@ class _CountState extends State<Test2Widget2> {
             },
             child: new Text("点我增加"),
           ),
-          new FadeInImage.memoryNetwork(
-              placeholder: kTransparentImage,
-              image:
-                  "http://01imgmini.eastday.com/mobile/20190227/2019022716_4160ed1c7126425e83f030c31f90f59a_4414_wmk.jpg"),
-          new Text("水平listView"),
-          new Container(
-            margin: new EdgeInsets.symmetric(vertical: 20.0),
-            height: 200.0,
-            child: new ListView(
-              //水平listView
-              // This next line does the trick.
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                new Container(
-                  width: 60.0,
-                  color: Colors.red,
-                ),
-                new Container(
-                  width: 60.0,
-                  color: Colors.blue,
-                ),
-                new Container(
-                  width: 60.0,
-                  color: Colors.green,
-                ),
-                new Container(
-                  width: 60.0,
-                  height: 20.0,
-                  color: Colors.yellow,
-                ),
-                new Container(
-                  width: 60.0,
-                  color: Colors.orange,
-                ),
-              ],
-            ),
-          ),
-          new Text("GridView"),
-          new Container(
-              margin: new EdgeInsets.symmetric(vertical: 20.0),
-              height: 200.0,
-              child: new GridView.count(
-                crossAxisCount: 2,
-                children: new List.generate(10, (index) {
-                  return new Center(
-                    child: new Text("Item $index"),
-                  );
-                }),
-              )),
-          new Expanded(
-              child: new Center(
-            // Expanded 剩下的填充布局。
-            child: new Text("你好我是测试！"),
-          ))
         ],
       ),
     ));
