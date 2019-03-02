@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/test1.dart';
 import 'package:flutter_app/test2.dart';
 import 'package:flutter_app/test3.dart';
+import 'package:flutter_app/test4HttpNet.dart';
 
 void main() {
   runApp(new MainApp());
@@ -26,7 +27,12 @@ class RandomWords extends StatefulWidget {
 }
 
 class RandomWordsState extends State<RandomWords> {
-  final List<String> list = ["简单的UI控件测试demo", "简单的UI控件测试demo2", "购物车demo测试例子3"];
+  final List<String> list = [
+    "简单的UI控件测试demo",
+    "简单的UI控件测试demo2",
+    "购物车demo测试例子3",
+    "测试网络请求4"
+  ];
   final TextStyle _biggerFont = new TextStyle(fontSize: 18.0);
 
   @override
@@ -48,6 +54,7 @@ class RandomWordsState extends State<RandomWords> {
         return _buildRow(list[index], index);
       },
       itemCount: list.length * 2,
+
 //      scrollDirection: Axis.horizontal,//水平布局
     );
   }
@@ -78,6 +85,8 @@ class RandomWordsState extends State<RandomWords> {
           return new Test2App();
         } else if (index == 2) {
           return new Test3App();
+        } else if (index == 4) {
+          return new Test4App();
         }
       }),
     );

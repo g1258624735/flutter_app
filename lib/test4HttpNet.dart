@@ -5,7 +5,7 @@ import 'package:transparent_image/transparent_image.dart';
 
 /// 以App 结尾的都是单独作为界面的 ； 以 widget 结尾的都只是单独的界面布局
 ///  本类重点测试 网络请求功能。
-class Test2App extends StatelessWidget {
+class Test4App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -29,14 +29,14 @@ class Test2App extends StatelessWidget {
         ),
         body: new Center(
 //          child: new Text("你好，欢迎来到安卓!"),
-          child: new Test2Widget2(),
+          child: new Test4Widget2(),
         ),
       ),
     );
   }
 }
 
-class Test2Widget extends StatelessWidget {
+class Test4Widget extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
       height: 56.0,
@@ -69,13 +69,13 @@ class PostBean {
   }
 }
 
-class Test2Widget2 extends StatefulWidget {
+class Test4Widget2 extends StatefulWidget {
   @override
   _CountState createState() => new _CountState();
 }
 
 /// 可以记录状态的 View  widget 是一种临时变量 view
-class _CountState extends State<Test2Widget2> {
+class _CountState extends State<Test4Widget2> {
   int _count = 0;
 
   void _increment() {
@@ -84,31 +84,32 @@ class _CountState extends State<Test2Widget2> {
     });
   }
 
-  Future<PostBean> fetchPost() async {
-
-  }
-
   Widget build(BuildContext context) {
     return new Material(
-        child: new NestedScrollView(
-      headerSliverBuilder: null,
-      body: new Column(
-        children: <Widget>[
-          new Test2Widget(),
-          new Stack(
-            children: <Widget>[new Text("test1我是则帧布局"), new Text("tex2我是则帧布局")],
-          ),
-          new Text("数量：$_count"),
-          new RaisedButton(
-            onPressed: () {
-              _increment();
-              final snackBar = new SnackBar(content: new Text("点击事件"));
-              Scaffold.of(context).showSnackBar(snackBar);
-            },
-            child: new Text("点我增加"),
-          ),
-        ],
-      ),
+        child: new CustomScrollView(
+          shrinkWrap: false,
+      slivers: <Widget>[
+        new SliverList(delegate: new SliverChildListDelegate(<Widget>[
+            new Column(
+          children: <Widget>[
+            new Test4Widget(),
+            new Stack(
+              children: <Widget>[new Text("test1我是则帧布局"), new Text("tex2我是则帧布局")],
+            ),
+            new Text("数量：$_count"),
+            new RaisedButton(
+              onPressed: () {
+                _increment();
+                final snackBar = new SnackBar(content: new Text("点击事件"));
+                Scaffold.of(context).showSnackBar(snackBar);
+              },
+              child: new Text("点我增加"),
+            ),
+          ],
+        ),
+        ]))
+
+      ],
     ));
   }
 }
