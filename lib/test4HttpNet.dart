@@ -36,25 +36,6 @@ class Test4App extends StatelessWidget {
   }
 }
 
-class Test4Widget extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return new Container(
-      height: 56.0,
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      decoration: new BoxDecoration(color: Colors.blue[500]),
-      child: new Row(
-        children: <Widget>[
-          new IconButton(
-              icon: new Icon(Icons.menu), tooltip: "菜单", onPressed: null),
-//          new Expanded(child: new ),
-          new IconButton(
-              icon: new Icon(Icons.search), tooltip: "搜索", onPressed: null)
-        ],
-      ),
-    );
-  }
-}
-
 class PostBean {
   final int userId;
   final int id;
@@ -87,28 +68,30 @@ class _CountState extends State<Test4Widget2> {
   Widget build(BuildContext context) {
     return new Material(
         child: new CustomScrollView(
-          shrinkWrap: false,
+      shrinkWrap: false,
       slivers: <Widget>[
-        new SliverList(delegate: new SliverChildListDelegate(<Widget>[
-            new Column(
-          children: <Widget>[
-            new Test4Widget(),
-            new Stack(
-              children: <Widget>[new Text("test1我是则帧布局"), new Text("tex2我是则帧布局")],
-            ),
-            new Text("数量：$_count"),
-            new RaisedButton(
-              onPressed: () {
-                _increment();
-                final snackBar = new SnackBar(content: new Text("点击事件"));
-                Scaffold.of(context).showSnackBar(snackBar);
-              },
-              child: new Text("点我增加"),
-            ),
-          ],
-        ),
+        new SliverList(
+            delegate: new SliverChildListDelegate(<Widget>[
+          new Column(
+            children: <Widget>[
+              new Stack(
+                children: <Widget>[
+                  new Text("test1我是则帧布局"),
+                  new Text("tex2我是则帧布局")
+                ],
+              ),
+              new Text("数量：$_count"),
+              new RaisedButton(
+                onPressed: () {
+                  _increment();
+                  final snackBar = new SnackBar(content: new Text("点击事件"));
+                  Scaffold.of(context).showSnackBar(snackBar);
+                },
+                child: new Text("点我增加"),
+              ),
+            ],
+          ),
         ]))
-
       ],
     ));
   }

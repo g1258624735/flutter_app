@@ -77,79 +77,80 @@ class _CountState extends State<Test2Widget2> {
 
   Widget build(BuildContext context) {
     return new Material(
-        child: new NestedScrollView(
-      headerSliverBuilder: null,
-      body: new Column(
-        children: <Widget>[
-          new Test2Widget(),
-          new Stack(
-            children: <Widget>[new Text("test1我是则帧布局"), new Text("tex2我是则帧布局")],
-          ),
-          new Text("数量：$_count"),
-          new RaisedButton(
-            onPressed: () {
-              _increment();
-              final snackBar = new SnackBar(content: new Text("点击事件"));
-              Scaffold.of(context).showSnackBar(snackBar);
-            },
-            child: new Text("点我增加"),
-          ),
-          new FadeInImage.memoryNetwork(
-              placeholder: kTransparentImage,
-              image:
-                  "http://01imgmini.eastday.com/mobile/20190227/2019022716_4160ed1c7126425e83f030c31f90f59a_4414_wmk.jpg"),
-          new Text("水平listView"),
-          new Container(
-            margin: new EdgeInsets.symmetric(vertical: 20.0),
-            height: 200.0,
-            child: new ListView(
-              //水平listView
-              // This next line does the trick.
-              scrollDirection: Axis.horizontal,
+        child: new CustomScrollView(shrinkWrap: false, slivers: <Widget>[
+      new SliverList(
+          delegate: new SliverChildListDelegate(<Widget>[
+        new Column(
+          children: <Widget>[
+            new Test2Widget(),
+            new Stack(
               children: <Widget>[
-                new Container(
-                  width: 60.0,
-                  color: Colors.red,
-                ),
-                new Container(
-                  width: 60.0,
-                  color: Colors.blue,
-                ),
-                new Container(
-                  width: 60.0,
-                  color: Colors.green,
-                ),
-                new Container(
-                  width: 60.0,
-                  height: 20.0,
-                  color: Colors.yellow,
-                ),
-                new Container(
-                  width: 60.0,
-                  color: Colors.orange,
-                ),
+                new Text("test1我是则帧布局"),
+                new Text("tex2我是则帧布局")
               ],
             ),
-          ),
-          new Text("GridView"),
-          new Container(
+            new Text("数量：$_count"),
+            new RaisedButton(
+              onPressed: () {
+                _increment();
+                final snackBar = new SnackBar(content: new Text("点击事件"));
+                Scaffold.of(context).showSnackBar(snackBar);
+              },
+              child: new Text("点我增加"),
+            ),
+            new FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage,
+                image:
+                    "http://01imgmini.eastday.com/mobile/20190227/2019022716_4160ed1c7126425e83f030c31f90f59a_4414_wmk.jpg"),
+            new Text("水平listView"),
+            new Container(
               margin: new EdgeInsets.symmetric(vertical: 20.0),
               height: 200.0,
-              child: new GridView.count(
-                crossAxisCount: 2,
-                children: new List.generate(10, (index) {
-                  return new Center(
-                    child: new Text("Item $index"),
-                  );
-                }),
-              )),
-          new Expanded(
-              child: new Center(
-            // Expanded 剩下的填充布局。
-            child: new Text("你好我是测试！"),
-          ))
-        ],
-      ),
-    ));
+              child: new ListView(
+                //水平listView
+                // This next line does the trick.
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  new Container(
+                    width: 60.0,
+                    color: Colors.red,
+                  ),
+                  new Container(
+                    width: 60.0,
+                    color: Colors.blue,
+                  ),
+                  new Container(
+                    width: 60.0,
+                    color: Colors.green,
+                  ),
+                  new Container(
+                    width: 60.0,
+                    height: 20.0,
+                    color: Colors.yellow,
+                  ),
+                  new Container(
+                    width: 60.0,
+                    color: Colors.orange,
+                  ),
+                ],
+              ),
+            ),
+            new Text("GridView"),
+            new Container(
+                margin: new EdgeInsets.symmetric(vertical: 20.0),
+                height: 200.0,
+                child: new GridView.count(
+                  crossAxisCount: 2,
+                  children: new List.generate(10, (index) {
+                    return new Center(
+                      child: new Text("Item $index"),
+                    );
+                  }),
+                )),
+
+          ],
+        ),
+      ]))
+    ]));
   }
 }

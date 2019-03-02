@@ -85,7 +85,7 @@ class RandomWordsState extends State<RandomWords> {
           return new Test2App();
         } else if (index == 2) {
           return new Test3App();
-        } else if (index == 4) {
+        } else if (index == 3) {
           return new Test4App();
         }
       }),
