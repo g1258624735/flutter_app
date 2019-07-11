@@ -5,6 +5,7 @@ import 'package:flutter_app/test3.dart';
 import 'package:flutter_app/test4HttpNet.dart';
 
 import 'Test5App.dart';
+import 'Test6App.dart';
 
 void main() {
   runApp(new MainApp());
@@ -34,7 +35,8 @@ class RandomWordsState extends State<RandomWords> {
     "简单的UI控件测试demo2",
     "购物车demo测试例子3",
     "测试网络请求4",
-    "基本控件测试"
+    "基本控件测试",
+    "基本控件测试2"
   ];
   final TextStyle _biggerFont = new TextStyle(fontSize: 18.0);
 
@@ -81,6 +83,7 @@ class RandomWordsState extends State<RandomWords> {
   void _toNextPage(int index) {
     Navigator.push(
       context,
+      // ignore: missing_return
       new MaterialPageRoute(builder: (context) {
 //        if (index == 0) {
 //          return new MyAppTest1();
@@ -93,17 +96,19 @@ class RandomWordsState extends State<RandomWords> {
 //        }else if (index == 4) {
 //          return new Test4App();
 //        }
-        switch(index){
+        switch (index) {
           case 0:
-            return new MyAppTest1();
+            return  MyAppTest1();
           case 1:
-            return new Test2App();
+            return  Test2App();
           case 2:
-            return new Test3App();
+            return  Test3App();
           case 3:
-            return new Test4App();
+            return  Test4App();
           case 4:
-            return new Test5App();
+            return  Test5App();
+          case 5:
+            return  Test6App();
         }
       }),
     );
