@@ -30,22 +30,51 @@ class Test6_1_App extends State<Test6App> {
       ),
 
       //todo 垂直布局
-      body: new Column(
-          children: [
-        Switch(value: isSwich,activeTrackColor: Colors.blue, onChanged: (value){
-          setState(() {
-            isSwich= value;
-          });
-        }),
-
+      body: new Column(children: [
+        Switch(
+            value: isSwich,
+            activeTrackColor: Colors.blue,
+            onChanged: (value) {
+              setState(() {
+                isSwich = value;
+              });
+            }),
         Checkbox(
           value: isCheck,
           activeColor: Colors.blue,
-          onChanged:(value) {
+          onChanged: (value) {
             setState(() {
               isCheck = value;
             });
           },
+        ),
+        TextField(
+          autofocus: true,
+          decoration: InputDecoration(
+              hintText: "请输入密码", labelText: "密码", prefixIcon: Icon(Icons.lock)),
+        ),
+        TextFormField(
+          autofocus: false,
+          decoration: InputDecoration(
+              hintText: "请输入用户名", labelText: "用户名", icon: Icon(Icons.people)),
+          validator: (v) {
+            return "用户名不能为空!";
+          },
+        ),
+        Row(
+          children: <Widget>[
+            Text(
+
+              "你好！",
+              textDirection: TextDirection.ltr,
+              style: TextStyle(
+                inherit: true,
+                color: Colors.red,
+                fontSize: 20,
+
+              ),
+            )
+          ],
         )
       ]),
     );
