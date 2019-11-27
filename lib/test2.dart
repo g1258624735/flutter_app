@@ -104,7 +104,7 @@ class _CountState extends State<Test2Widget2> {
                     "http://01imgmini.eastday.com/mobile/20190227/2019022716_4160ed1c7126425e83f030c31f90f59a_4414_wmk.jpg"),
             new Text("水平listView"),
             new Container(
-              margin: new EdgeInsets.symmetric(vertical: 20.0),
+              margin: new EdgeInsets.symmetric(vertical: 20.0,horizontal: 20),
               height: 200.0,
               child: new ListView(
                 //水平listView
@@ -114,6 +114,7 @@ class _CountState extends State<Test2Widget2> {
                   new Container(
                     width: 60.0,
                     color: Colors.red,
+                    margin:new EdgeInsets.only(left: 10.0,right: 20,top: 12,bottom: 15),
                   ),
                   new Container(
                     width: 60.0,
