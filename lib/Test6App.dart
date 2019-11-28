@@ -65,7 +65,7 @@ class Test6_1_App extends State<Test6App> {
           children: <Widget>[
             Text(
 
-              "你好！",
+              "测试1！",
               textDirection: TextDirection.ltr,
               style: TextStyle(
                 inherit: true,
