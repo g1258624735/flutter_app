@@ -18,7 +18,12 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Startup Name Generator',
-      theme: new ThemeData(primarySwatch: Colors.blueGrey),
+      theme: new ThemeData(
+        primarySwatch: Colors.blueGrey,
+        primaryColor: Color(0xFFC91B3A),
+        backgroundColor: Color(0xFFC91B3A),
+        accentColor: Color(0xFF888888),
+      ),
       home: new RandomWords(),
     );
   }
@@ -98,17 +103,17 @@ class RandomWordsState extends State<RandomWords> {
 //        }
         switch (index) {
           case 0:
-            return  MyAppTest1();
+            return MyAppTest1();
           case 1:
-            return  Test2App();
+            return Test2App();
           case 2:
-            return  Test3App();
+            return Test3App();
           case 3:
-            return  Test4App();
+            return Test4App();
           case 4:
-            return  Test5App();
+            return Test5App();
           case 5:
-            return  Test6App();
+            return Test6App();
         }
       }),
     );

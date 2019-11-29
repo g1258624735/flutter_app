@@ -31,6 +31,7 @@ class Test6_1_App extends State<Test6App> {
 
       //todo 垂直布局
       body: new Column(children: [
+        //两种状态开关按钮
         Switch(
             value: isSwich,
             activeTrackColor: Colors.blue,
@@ -61,20 +62,46 @@ class Test6_1_App extends State<Test6App> {
             return "用户名不能为空!";
           },
         ),
-        Row(
-          children: <Widget>[
-            Text(
 
-              "测试1！",
-              textDirection: TextDirection.ltr,
-              style: TextStyle(
-                inherit: true,
-                color: Colors.red,
-                fontSize: 20,
-
-              ),
-            )
-          ],
+        Text(
+          "测试1！",
+          textDirection: TextDirection.ltr,
+          style: TextStyle(
+            inherit: true,
+            color: Colors.red,
+            fontSize: 20,
+          ),
+        ),
+        new Container(
+            height: 100.0,
+            padding: EdgeInsets.all(16),
+            //功能强大的装饰器 可以设置圆角、边框、背景色、背景图片
+            decoration: BoxDecoration(
+              color: Colors.lightBlueAccent,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            child: ListView.separated(
+              padding: EdgeInsets.all(5),
+              itemBuilder: (BuildContext context, int i) {
+                return new ListTile(title: new Text("我是listView"));
+              },
+              // listView 线条
+              separatorBuilder: (BuildContext context, int index) {
+                return new Container(height: 1.0, color: Colors.red);
+              },
+              itemCount: 2,
+            )),
+        new Container(
+          height: 100.0,
+          decoration: BoxDecoration( color: Colors.lightBlueAccent,borderRadius: BorderRadius.all(Radius.circular(8))),
+          //子类对齐方式
+          alignment:Alignment.center ,
+          //外边距
+          margin: EdgeInsets.all(15),
+          //内边距
+          padding: EdgeInsets.all(16),
+          //背景色
+          child: Text("我是一个容器",style: TextStyle(color: Colors.white)),
         )
       ]),
     );
