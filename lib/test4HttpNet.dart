@@ -9,28 +9,14 @@ class Test4App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Flutter Demo',
-      theme: new ThemeData(
-        primarySwatch: Colors.red,
-      ),
-      home: new Scaffold(
-        //Scaffold是Material中主要的布局组件.
-        appBar: new AppBar(
-          actions: <Widget>[
-            new RaisedButton(
-                onPressed: () {
-                  // Navigate back to first screen when tapped!
-                  Navigator.pop(context);
-                },
-                child: new Text('返回'))
-          ],
+    return new Scaffold(
+      //Scaffold是Material中主要的布局组件.
+      appBar: new AppBar(
           title: new Text("welcome to android"),
-        ),
-        body: new Center(
+          automaticallyImplyLeading: true),
+      body: new Center(
 //          child: new Text("你好，欢迎来到安卓!"),
-          child: new Test4Widget2(),
-        ),
+        child: new Test4Widget2(),
       ),
     );
   }

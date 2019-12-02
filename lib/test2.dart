@@ -8,12 +8,7 @@ class Test2App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Flutter Demo',
-      theme: new ThemeData(
-        primarySwatch: Colors.red,
-      ),
-      home: new Scaffold(
+    return  new Scaffold(
         //Scaffold是Material中主要的布局组件.
         appBar: new AppBar(
           actions: <Widget>[
@@ -36,8 +31,7 @@ class Test2App extends StatelessWidget {
 //          child: new Text("你好，欢迎来到安卓!"),
           child: new Test2Widget2(),
         ),
-      ),
-    );
+      );
   }
 }
 

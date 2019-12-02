@@ -74,6 +74,7 @@ class Test6_1_App extends State<Test6App> {
         ),
         new Container(
             height: 100.0,
+            margin: EdgeInsets.all(16),
             padding: EdgeInsets.all(16),
             //功能强大的装饰器 可以设置圆角、边框、背景色、背景图片
             decoration: BoxDecoration(
@@ -93,7 +94,8 @@ class Test6_1_App extends State<Test6App> {
             )),
         new Container(
           height: 100.0,
-          decoration: BoxDecoration( color: Colors.lightBlueAccent,borderRadius: BorderRadius.all(Radius.circular(8))),
+          decoration: BoxDecoration( color: Colors.lightBlueAccent,borderRadius:
+          BorderRadius.all(Radius.circular(8))),
           //子类对齐方式
           alignment:Alignment.center ,
           //外边距
