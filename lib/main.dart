@@ -6,6 +6,7 @@ import 'package:flutter_app/test4HttpNet.dart';
 
 import 'Test5App.dart';
 import 'Test6App.dart';
+import 'Test7App.dart';
 
 void main() {
   runApp(new MainApp());
@@ -41,7 +42,7 @@ class RandomWordsState extends State<RandomWords> {
     "购物车demo测试例子3",
     "测试网络请求4",
     "基本控件测试",
-    "基本控件测试2"
+    "基本控件测试2",
     "基本控件测试3"
   ];
   final TextStyle _biggerFont = new TextStyle(fontSize: 18.0);
@@ -115,6 +116,8 @@ class RandomWordsState extends State<RandomWords> {
             return Test5App();
           case 5:
             return Test6App();
+          case 6:
+            return Test7App();
         }
       }),
     );
