@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'Test7App_1.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
 
 class Test7App extends StatefulWidget {
@@ -31,7 +33,7 @@ class Test7_1_App extends State<Test7App> {
     return new Scaffold(
       //todo 导航栏
       appBar: new AppBar(
-          title: new Text("基本测试控件2"),
+          title: new Text("基本测试控件3"),
           bottom: TabBar(
             tabs: list.map((t) {
               return new Text(t);
@@ -46,9 +48,10 @@ class Test7_1_App extends State<Test7App> {
       //todo 垂直布局
       body: TabBarView(
           controller: _TabControl,
-          children: list.map((t) {
-            return Center(child: Text(t));
-          }).toList()),
+          children: <Widget>[
+            Test7App_1(),
+            Test7App_1(),
+          ]),
     );
   }
 }
