@@ -94,18 +94,31 @@ class Test6_1_App extends State<Test6App> {
             )),
         new Container(
           height: 100.0,
-          decoration: BoxDecoration( color: Colors.lightBlueAccent,borderRadius:
-          BorderRadius.all(Radius.circular(8))),
+          decoration: BoxDecoration(
+              color: Colors.lightBlueAccent,
+              borderRadius: BorderRadius.all(Radius.circular(8))),
           //子类对齐方式
-          alignment:Alignment.center ,
+          alignment: Alignment.center,
           //外边距
           margin: EdgeInsets.all(15),
           //内边距
           padding: EdgeInsets.all(16),
           //背景色
-          child: Text("我是一个容器",style: TextStyle(color: Colors.white)),
+          child: Text("我是一个容器", style: TextStyle(color: Colors.white)),
         )
       ]),
     );
+  }
+
+  @override
+  void dispose() {
+    //界面销毁方法
+    super.dispose();
+  }
+
+  @override
+  void deactivate() {
+    //界面销毁方法
+    super.deactivate();
   }
 }

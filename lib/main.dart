@@ -42,6 +42,7 @@ class RandomWordsState extends State<RandomWords> {
     "测试网络请求4",
     "基本控件测试",
     "基本控件测试2"
+    "基本控件测试3"
   ];
   final TextStyle _biggerFont = new TextStyle(fontSize: 18.0);
 
