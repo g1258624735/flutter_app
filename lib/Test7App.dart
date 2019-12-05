@@ -39,10 +39,10 @@ class Test7_1_App extends State<Test7App> {
               return new Text(t);
             }).toList(),
             controller:_TabControl,
-            indicatorColor: Colors.green,
+            indicatorColor: Colors.white,
             isScrollable: true,
               indicatorSize:TabBarIndicatorSize.tab,
-            indicatorWeight: 8.0,
+            indicatorWeight: 3.0,
 
           )),
       //todo 垂直布局

@@ -7,7 +7,7 @@ class Test7App_1 extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return new  Column(children: <Widget>[
-      Text("第一个控件"),
+      Text(""),
 
     ]);
   }
