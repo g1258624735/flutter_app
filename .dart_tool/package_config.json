@@ -197,10 +197,10 @@
       "name": "flutter_app",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.8"
     }
   ],
-  "generated": "2019-12-14T17:19:02.547764Z",
+  "generated": "2019-12-16T11:19:38.732657Z",
   "generator": "pub",
-  "generatorVersion": "2.7.0"
+  "generatorVersion": "2.8.0-dev.0.0.flutter-45db297095"
 }
