@@ -1,7 +1,6 @@
 // Step 4: Create an infinite scrolling lazily loaded list
 
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 /// 以App 结尾的都是单独作为界面的 ； 以 widget 结尾的都只是单独的界面布局
 class Test2App extends StatelessWidget {
@@ -93,7 +92,6 @@ class _CountState extends State<Test2Widget2> {
               child: new Text("点我增加"),
             ),
             new FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
                 image:
                     "http://01imgmini.eastday.com/mobile/20190227/2019022716_4160ed1c7126425e83f030c31f90f59a_4414_wmk.jpg"),
             new Text("水平listView"),

@@ -1,7 +1,6 @@
 // Step 4: Create an infinite scrolling lazily loaded list
 
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 /// 以App 结尾的都是单独作为界面的 ； 以 widget 结尾的都只是单独的界面布局
 ///  本类重点测试 网络请求功能。
