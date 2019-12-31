@@ -120,6 +120,7 @@ class Test5App extends StatelessWidget {
         currentIndex: 0,
         selectedItemColor: Colors.red,
         onTap: onclick(),
+        type:BottomNavigationBarType.fixed ,
       ),
     );
   }

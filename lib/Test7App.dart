@@ -2,8 +2,9 @@
 import 'package:flutter/material.dart';
 
 import 'Test7App_1.dart';
-
+ final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 class Test7App extends StatefulWidget {
+
   //todo 底部按钮点击时间回掉掉方法
   onclick() {}
 
@@ -14,6 +15,7 @@ class Test7App extends StatefulWidget {
 }
 
 class Test7_1_App extends State<Test7App> {
+
   List list = ["控件测试1", "控件测试2"];
   bool isCheck = false;
   bool isSwich = false;
@@ -32,6 +34,7 @@ class Test7_1_App extends State<Test7App> {
     // TODO: implement build
     return new Scaffold(
       //todo 导航栏
+      key: scaffoldKey,
       appBar: new AppBar(
           title: new Text("基本测试控件3"),
           bottom: TabBar(
