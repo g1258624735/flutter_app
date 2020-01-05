@@ -86,8 +86,10 @@ class _Test7App_1_1 extends State {
         textColor: Colors.white,
       ),
       Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text("DropDown_Button"),
+
+          Text("请选择"),
           DropdownButton<String>(
             value: _value,
             onChanged: (String newValue) {
@@ -95,7 +97,7 @@ class _Test7App_1_1 extends State {
                 this._value = newValue;
               });
             },
-            items: <String>['One', 'Two', 'Free', 'Four']
+            items: <String>["One", "Two", "Free", "Four"]
                 .map<DropdownMenuItem<String>>((String text) {
               return DropdownMenuItem<String>(
                 value: text,
@@ -108,7 +110,7 @@ class _Test7App_1_1 extends State {
     ]);
   }
 
-  String _value = "";
+  String _value = "One";
 }
 
 class _Drawle extends StatelessWidget {
