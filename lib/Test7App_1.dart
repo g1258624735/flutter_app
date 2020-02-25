@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/ToastPostion.dart';
 
 import 'Test7App.dart';
 
@@ -38,7 +39,7 @@ class _Test7App_1_1 extends State {
       Text("第一个控件"),
       Row(
         children: <Widget>[
-          //测试单选按钮
+          //测试单选按钮  radioGroup
           Radio(
             value: "中文",
             groupValue: _groupValue,
@@ -85,12 +86,21 @@ class _Test7App_1_1 extends State {
         highlightColor: Colors.green,
         textColor: Colors.white,
       ),
+      //可以通过 Container 包裹 Button 来控制 按钮的宽高。
+      new Container(
+          height: 60,
+          width: 100,
+          child: RaisedButton(
+              onPressed: () {
+                Toast.toast(context, msg: "我是toast土司 ",position: ToastPostion.bottom);
+              },
+              child: Text("控制按钮宽高"))),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-
           Text("请选择"),
           DropdownButton<String>(
+            hint: new Text("初始化选择值"),
             value: _value,
             onChanged: (String newValue) {
               setState(() {
@@ -114,6 +124,7 @@ class _Test7App_1_1 extends State {
 }
 
 class _Drawle extends StatelessWidget {
+  //const 类似 java final 效果
   const _Drawle();
 
   @override
