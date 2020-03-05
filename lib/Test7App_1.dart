@@ -1,11 +1,12 @@
 //import 'package:fluttertoast/fluttertoast.dart';
 
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ToastPostion.dart';
 
-import 'Test7App.dart';
-
+//测试控件 7
 class Test7App_1 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -92,7 +93,8 @@ class _Test7App_1_1 extends State {
           width: 100,
           child: RaisedButton(
               onPressed: () {
-                Toast.toast(context, msg: "我是toast土司 ",position: ToastPostion.bottom);
+                Toast.toast(context,
+                    msg: "我是toast土司 ", position: ToastPostion.bottom);
               },
               child: Text("控制按钮宽高"))),
       Row(
@@ -115,6 +117,81 @@ class _Test7App_1_1 extends State {
               );
             }).toList(),
           ),
+        ],
+      ),
+      Card(
+          clipBehavior: Clip.antiAlias,
+          child: Container(
+              child: Text("我是card布局"),
+              height: 60,
+              alignment: Alignment.center,
+              width: 100)),
+      RaisedButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              child: AlertDialog(
+                title: Text("这是一个测试dialog"),
+                content: Text("这是dialog内容"),
+                actions: <Widget>[
+                  OutlineButton(
+                      onPressed: () {
+                        Navigator.pop(context, -1);
+                      },
+                      child: Text("取消")),
+                  OutlineButton(
+                      onPressed: () {
+                        Navigator.pop(context, -1);
+                      },
+                      child: Text("确定"))
+                ],
+              ));
+        },
+        child: Text("dialog"),
+      ),
+      OutlineButton(
+        child: Text("PopupMenuButton"),
+        onPressed: () {
+          final RenderBox button = context.findRenderObject();
+          final RenderBox overlay =
+              Overlay.of(context).context.findRenderObject();
+          final RelativeRect position = RelativeRect.fromRect(
+            Rect.fromPoints(
+              button.localToGlobal(Offset(0, 0), ancestor: overlay),
+              button.localToGlobal(button.size.bottomRight(Offset.zero),
+                  ancestor: overlay),
+            ),
+            Offset.zero & overlay.size,
+          );
+
+          var pop = PopupMenuButton(
+            padding: EdgeInsets.zero,
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem(child: Text("item1")),
+              const PopupMenuItem(child: Text("item1")),
+              const PopupMenuItem(child: Text("item1"))
+            ],
+            onSelected: (String str) {},
+          );
+          showMenu(
+              context: context,
+              position: position,
+              items: pop.itemBuilder(context));
+        },
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Text("PopupMenuButton"),
+          PopupMenuButton(
+            padding: EdgeInsets.zero,
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem(child: Text("item1")),
+              const PopupMenuItem(child: Text("item1")),
+              const PopupMenuItem(child: Text("item1"))
+            ],
+            onSelected: (String str) {},
+          )
         ],
       )
     ]);
