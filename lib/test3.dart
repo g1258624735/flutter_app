@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class Test3App extends StatelessWidget {
@@ -8,7 +10,22 @@ class Test3App extends StatelessWidget {
       products: [
         new Product(name: "商品1-点我删除"),
         new Product(name: "商品2--点我删除"),
-        new Product(name: "商品3-点我删除")
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
+        new Product(name: "商品3-点我删除"),
       ],
     );
   }
@@ -68,7 +85,8 @@ class ShoppingListItem extends StatelessWidget {
     );
   }
 }
-
+final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+GlobalKey<RefreshIndicatorState>();
 class ShoppingListWidget extends StatefulWidget {
   ///如果没有key，当前构建中的第一个条目将始终与前一个构建中的第一个条目同步，即使在语义上，列表中的第一个条目如果滚动出屏幕，那么它将不会再在窗口中可见。
   ///通过给列表中的每个条目分配为“语义” key，无限列表可以更高效，
@@ -77,6 +95,7 @@ class ShoppingListWidget extends StatefulWidget {
   ///保留的状态将附加到相同的语义条目上，而不是附加到相同数字位置上的条目。
   ShoppingListWidget({Key key, this.products}) : super(key: key);
   final List<Product> products;
+
 
   @override
   State<StatefulWidget> createState() {
@@ -98,22 +117,34 @@ class _ShoppingListState extends State<ShoppingListWidget> {
     });
   }
 
+  //异步
+  Future<void> _handleRefresh() {
+    Completer<void> completer = Completer<void>();
+    Timer(const Duration(seconds: 1), () {
+      completer.complete();
+    });
+    return completer.future.then<void>((_){
+      _refreshIndicatorKey.currentState.dispose();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("购物车"),
-      ),
-      body: new ListView(
-        padding: new EdgeInsets.symmetric(vertical: 8.0),
-        children: widget.products.map((Product product) {
-          return new ShoppingListItem(
-              product: product,
-              inCart: _shoppingCart.contains(product),
-              onCartChanged: _handleCartChanged);
-        }).toList(),
-      ),
-    );
+        appBar: new AppBar(
+          title: new Text("购物车"),
+        ),
+        body: RefreshIndicator(
+            child: new ListView(
+              padding: new EdgeInsets.symmetric(vertical: 8.0),
+              children: widget.products.map((Product product) {
+                return new ShoppingListItem(
+                    product: product,
+                    inCart: _shoppingCart.contains(product),
+                    onCartChanged: _handleCartChanged);
+              }).toList(),
+            ),
+            onRefresh: _handleRefresh));
   }
 }

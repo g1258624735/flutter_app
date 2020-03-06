@@ -39,6 +39,7 @@ class _Test7App_1_1 extends State {
     return new Column(children: <Widget>[
       Text("第一个控件"),
       Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           //测试单选按钮  radioGroup
           Radio(

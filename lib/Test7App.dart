@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'Test7App_1.dart';
+import 'Test7App_2.dart';
  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 class Test7App extends StatefulWidget {
 
@@ -53,7 +54,7 @@ class Test7_1_App extends State<Test7App> {
           controller: _TabControl,
           children: <Widget>[
             Test7App_1(),
-            Test7App_1(),
+            Test7App_2(),
           ]),
     );
   }
