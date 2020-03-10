@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/ToastPostion.dart';
+import 'package:flutter_app/test/ToastPostion.dart';
 
 //测试控件 7
 class Test7App_1 extends StatefulWidget {

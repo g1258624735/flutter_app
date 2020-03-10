@@ -2,13 +2,14 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/main.dart';
+import 'package:flutter_app/test/main.dart';
 import 'package:flutter_app/zhihu_demo/MyInfoPage.dart';
 
 import 'HomeListPage.dart';
 import 'TreePage.dart';
 
-//仿知测试demo
+
+//仿知乎测试demo
 class Zhihu_main extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

@@ -1,33 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/test1.dart';
-import 'package:flutter_app/test2.dart';
-import 'package:flutter_app/test3.dart';
-import 'package:flutter_app/test4HttpNet.dart';
+import 'package:flutter_app/test/test1.dart';
+import 'package:flutter_app/test/test2.dart';
+import 'package:flutter_app/test/test3.dart';
+import 'package:flutter_app/test/test4HttpNet.dart';
 import 'package:flutter_app/zhihu_demo/Zhihu_main.dart';
 
 import 'Test5App.dart';
 import 'Test6App.dart';
 import 'Test7App.dart';
-
 void main() {
   runApp(new Zhihu_main());
 }
 
 /// list 列表 菜单列表
-// ignore: must_be_immutable
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return new RandomWords();
-  }
+  createState() => new _MainApp();
 }
 
-class RandomWords extends StatefulWidget {
-  @override
-  createState() => new RandomWordsState();
-}
-
-class RandomWordsState extends State<RandomWords> {
+class _MainApp extends State<MainApp> {
   final List<String> list = [
     "简单的UI控件测试demo",
     "简单的UI控件测试demo2",
