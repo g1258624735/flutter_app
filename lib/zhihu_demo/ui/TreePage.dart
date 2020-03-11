@@ -1,23 +1,12 @@
 import 'package:flutter/material.dart';
 
 //列表页
-class TreePage extends StatelessWidget {
-  // This widget is the root of your application.
+class TreePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return new _MyHomePage(title: 'TreePage');
-  }
+  _TreePageState createState() => new _TreePageState();
 }
 
-class _MyHomePage extends StatefulWidget {
-  _MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => new _MyHomePageState();
-}
-
-class _MyHomePageState extends State<_MyHomePage> {
+class _TreePageState extends State<TreePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
