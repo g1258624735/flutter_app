@@ -4,18 +4,18 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 ///详情界面
 
-class MyPageInfo extends StatefulWidget {
+class DetailInfoPage extends StatefulWidget {
   final String title;
   final String url;
 
-  MyPageInfo({Key key, @required this.title, @required this.url})
+  DetailInfoPage({Key key, @required this.title, @required this.url})
       : super(key: key);
 
   @override
-  _MyPageInfoState createState() => new _MyPageInfoState();
+  _DetailInfoPageState createState() => new _DetailInfoPageState();
 }
 
-class _MyPageInfoState extends State<MyPageInfo> {
+class _DetailInfoPageState extends State<DetailInfoPage> {
   final flutterWebViewPlugin = FlutterWebviewPlugin();
 
   @override

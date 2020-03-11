@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/util/StringUtils.dart';
+import 'package:flutter_app/zhihu_demo/util/StringUtils.dart';
 
 //我的界面
 class ArticleItem extends StatefulWidget {
   var itemData;
-  bool isSearch;
+  bool isSearch=false;
   String id;
 
-  ArticleItem(String itemData) {
+  ArticleItem(var itemData) {
     this.itemData = itemData;
   }
 
-  ArticleItem.isSearch(String itemData, String id) {
+  ArticleItem.isSearch(var itemData, String id) {
     this.itemData = itemData;
     this.id = id;
   }

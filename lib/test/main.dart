@@ -3,16 +3,18 @@ import 'package:flutter_app/test/test1.dart';
 import 'package:flutter_app/test/test2.dart';
 import 'package:flutter_app/test/test3.dart';
 import 'package:flutter_app/test/test4HttpNet.dart';
-import 'package:flutter_app/zhihu_demo/Zhihu_main.dart';
+import 'package:flutter_app/zhihu_demo/ui/BottomNavigationPage.dart';
+import 'package:flutter_app/zhihu_demo/ui/ZhiHuMainPage.dart';
 
 import 'Test5App.dart';
 import 'Test6App.dart';
 import 'Test7App.dart';
+
 void main() {
-  runApp(new Zhihu_main());
+  runApp(new MainApp());
 }
 
-/// list 列表 菜单列表
+/// 首页 list 列表 菜单列表
 class MainApp extends StatefulWidget {
   @override
   createState() => new _MainApp();
@@ -27,16 +29,27 @@ class _MainApp extends State<MainApp> {
     "基本控件测试",
     "基本控件测试2",
     "基本控件测试3",
+    "测试BottomNavigation",
+    "仿知乎demo",
   ];
   final TextStyle _biggerFont = new TextStyle(fontSize: 18.0);
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-    key: scaffoldKey,
-      body: _buildSuggestions( context),
-    );
+    return new MaterialApp(
+        title: 'Startup Name Generator',
+        theme: new ThemeData(
+          primarySwatch: Colors.blueGrey,
+          primaryColor: Color(0xFFC91B3A),
+          backgroundColor: Color(0xFFC91B3A),
+          accentColor: Color(0xFF888888),
+        ),
+        home: Scaffold(
+          appBar: AppBar(title: Text("首页")),
+          body: _buildSuggestions(context),
+        ));
   }
+
   GlobalKey<ScaffoldState> scaffoldKey;
 
   @override
@@ -44,21 +57,21 @@ class _MainApp extends State<MainApp> {
     super.initState();
     scaffoldKey = GlobalKey<ScaffoldState>();
   }
+
   Widget _buildSuggestions(BuildContext context) {
     return new ListView.builder(
       padding: const EdgeInsets.all(16.0),
       itemBuilder: (context, i) {
         if (i.isOdd) return new Divider();
         final index = i ~/ 2;
-        return _buildRow(context,list[index], index);
+        return _buildRow(context, list[index], index);
       },
       itemCount: list.length * 2,
-
 //      scrollDirection: Axis.horizontal,//水平布局
     );
   }
 
-  Widget _buildRow(BuildContext context,String pair, int index) {
+  Widget _buildRow(BuildContext context, String pair, int index) {
     return new Dismissible(
         key: new Key("$index"),
 //        onDismissed: (direction) => list.removeAt(index),
@@ -68,13 +81,13 @@ class _MainApp extends State<MainApp> {
             style: _biggerFont,
           ),
           onTap: () {
-            _toNextPage(context,index);
+            _toNextPage(context, index);
           },
         ));
   }
 
   ///跳转到下一页
-  void _toNextPage(BuildContext context,int index) {
+  void _toNextPage(BuildContext context, int index) {
     // ignore: missing_return
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       switch (index) {
@@ -92,6 +105,10 @@ class _MainApp extends State<MainApp> {
           return Test6App();
         case 6:
           return Test7App();
+        case 7:
+          return BottomNavigationPage();
+        case 8:
+          return ZhiHuMainPage();
       }
     }));
   }

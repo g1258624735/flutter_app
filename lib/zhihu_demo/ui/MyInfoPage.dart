@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-//列表页
-class TreePage extends StatelessWidget {
+
+//我的界面
+class MyInfoPage extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return new _MyHomePage(title: 'TreePage');
+    return new _MyHomePage(title: 'MyInfoPage');
   }
 }
 
@@ -49,6 +50,7 @@ class _MyHomePageState extends State<_MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return new Scaffold(
+      appBar: AppBar(title: Text("我的")),
       body: new Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
