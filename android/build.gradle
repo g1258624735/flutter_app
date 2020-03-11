@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath 'com.android.tools.build:gradle:3.5.0'
     }
 }
 
@@ -13,6 +13,62 @@ allprojects {
     repositories {
         google()
         jcenter()
+    }
+}
+project.configurations.all {
+    resolutionStrategy.eachDependency { details ->
+//        if (details.requested.group == 'com.android.support'
+//                && !details.requested.name.contains('multidex') ) {
+//            details.useVersion "27.1.1"
+//        }else if(details.requested.group == 'androidx.lifecycle')
+//        {
+//            details.useVersion "2.0.0"
+//        }else if(details.requested.group == 'androidx.versionedparcelable')
+//        {
+//            details.useVersion "1.0.0"
+//        }else if(details.requested.group == 'androidx.core')
+//        {
+//            details.useVersion "1.0.0"
+//        }
+//        else
+//
+//        if (details.requested.group == 'androidx.print' ) {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.asynclayoutinflater') {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.localbroadcastmanager') {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.coordinatorlayout' ) {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.versionedparcelable') {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.loader' ) {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.legacy' ) {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.core' ) {
+//            details.useVersion "1.1.0"
+//        }else if (details.requested.group == 'androidx.interpolator' ) {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.versionedparcelable' ) {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.slidingpanelayout' ) {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.swiperefreshlayout' ) {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.lifecycle') {
+//            details.useVersion "2.0.0"
+//        }else if (details.requested.group == 'androidx.arch.core') {
+//            details.useVersion "2.0.0"
+//        }else if (details.requested.group == 'androidx.documentfile') {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.legacy' ) {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.drawerlayout' ) {
+//            details.useVersion "1.0.0"
+//        }else if (details.requested.group == 'androidx.customview' ) {
+//            details.useVersion "1.0.0"
+//        }
     }
 }
 
