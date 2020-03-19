@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/zhihu_demo/ui/HomeListPage.dart';
-import 'package:flutter_app/zhihu_demo/ui/MyInfoPage.dart';
+import 'package:flutter_app/zhihu_demo/ui/MinePage.dart';
 import 'package:flutter_app/zhihu_demo/ui/SearchPage.dart';
 import 'package:flutter_app/zhihu_demo/ui/TreePage.dart';
 
@@ -72,7 +72,7 @@ class _ZhiHuMainPageState extends State<ZhiHuMainPage> {
         case 1:
           return TreePage();
         case 2:
-          return MyInfoPage();
+          return MinePage();
         case 3:
           return SearchPage();
       }

@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/zhihu_demo/ui/MyInfoPage.dart';
+import 'package:flutter_app/zhihu_demo/ui/MinePage.dart';
 
 import 'HomeListPage.dart';
 import 'SearchPage.dart';
@@ -47,7 +47,7 @@ class _ZhiHuMain extends State {
     _body = IndexedStack(index: _tabIndex, children: <Widget>[
       HomeListPage(),
       TreePage(),
-      MyInfoPage()
+      MinePage()
     ]);
     return new MaterialApp(
       navigatorKey: navigatorKey,

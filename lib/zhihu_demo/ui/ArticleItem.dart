@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/zhihu_demo/util/StringUtils.dart';
 
+import 'ArticleDetailWebPage.dart';
+
 //我的界面
 class ArticleItem extends StatefulWidget {
   var itemData;
@@ -101,9 +103,17 @@ class _ArticleItemState extends State<ArticleItem> {
       child: InkWell(
         child: column,
         onTap: () {
-//          _itemClick(widget.itemData);
+          _itemClick(widget.itemData);
         },
       ),
     );
+  }
+  void _itemClick(itemData) async {
+    await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return ArticleDetailWebPage(
+        title: itemData['title'],
+        url: itemData['link'],
+      );
+    }));
   }
 }

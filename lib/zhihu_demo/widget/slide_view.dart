@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/zhihu_demo/ui/DetailInfoPage.dart';
+import 'package:flutter_app/zhihu_demo/ui/ArticleDetailWebPage.dart';
 
 class SlideView extends StatefulWidget {
   var data;
@@ -78,7 +78,7 @@ class SlideViewState extends State<SlideView>
 
   void _handOnItemClick(itemData) {
     Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-      return new DetailInfoPage(title:itemData['title'],url: itemData['link']);
+      return new ArticleDetailWebPage(title:itemData['title'],url: itemData['link']);
     }));
   }
 }
