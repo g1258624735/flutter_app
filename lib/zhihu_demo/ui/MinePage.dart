@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/ToastPostion.dart';
 
+import 'LoginPage.dart';
+
 //我的界面
 class MinePage extends StatefulWidget {
   @override
@@ -35,7 +37,7 @@ class _MinePageState extends State<MinePage> {
                 highlightColor: Colors.lightBlueAccent,
                 onPressed: () {
                   setState(() {
-                    Toast.toast(context, msg: "正在登录中...");
+                    Navigator.of(context).push(MaterialPageRoute(builder:(context)=>LoginPage()));
                   });
                 },
               )),
