@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
           Container(
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.only(top: 16,left: 20,right: 20),
-              child: TextField(decoration: InputDecoration(labelText: ),)),
+              child: TextField(decoration: InputDecoration(labelText:"fds" ),)),
 
         ],
       ),
