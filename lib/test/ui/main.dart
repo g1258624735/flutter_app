@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/test/test1.dart';
-import 'package:flutter_app/test/test2.dart';
-import 'package:flutter_app/test/test3.dart';
-import 'package:flutter_app/test/test4HttpNet.dart';
+import 'package:flutter_app/test/bean/notieManagerTest.dart';
+import 'package:flutter_app/test/ui/test1.dart';
+import 'package:flutter_app/test/ui/test2.dart';
+import 'package:flutter_app/test/ui/test3.dart';
+import 'package:flutter_app/test/ui/test4HttpNet.dart';
 import 'package:flutter_app/zhihu_demo/ui/BottomNavigationPage.dart';
 import 'package:flutter_app/zhihu_demo/ui/ZhiHuMainPage.dart';
+import 'package:provider/provider.dart';
 
 import 'Test5App.dart';
 import 'Test6App.dart';
 import 'Test7App.dart';
 
 void main() {
-  runApp(new MainApp());
-}
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<NoticeManagerTest>.value(value: NoticeManagerTest())
+  ], child: MainApp()));
+  }
 
 /// 首页 list 列表 菜单列表
 class MainApp extends StatefulWidget {

@@ -1,6 +1,8 @@
 // Step 4: Create an infinite scrolling lazily loaded list
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/test/bean/notieManagerTest.dart';
+import 'package:provider/provider.dart';
 
 /// 以App 结尾的都是单独作为界面的 ； 以 widget 结尾的都只是单独的界面布局
 class Test2App extends StatelessWidget {
@@ -27,7 +29,6 @@ class Test2App extends StatelessWidget {
           title: new Text("welcome to android"),
         ),
         body: new Center(
-//          child: new Text("你好，欢迎来到安卓!"),
           child: new Test2Widget2(),
         ),
       );
@@ -82,6 +83,7 @@ class _CountState extends State<Test2Widget2> {
                 new Text("tex2我是则帧布局")
               ],
             ),
+            new Text("我是全局变量：${Provider.of<NoticeManagerTest>(context).count}"),
             new Text("数量：$_count"),
             new RaisedButton(
               onPressed: () {
