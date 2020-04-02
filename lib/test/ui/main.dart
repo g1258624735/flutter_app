@@ -11,12 +11,13 @@ import 'package:provider/provider.dart';
 import 'Test5App.dart';
 import 'Test6App.dart';
 import 'Test7App.dart';
+import 'TestAnimation.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<NoticeManagerTest>.value(value: NoticeManagerTest())
   ], child: MainApp()));
-  }
+}
 
 /// 首页 list 列表 菜单列表
 class MainApp extends StatefulWidget {
@@ -35,6 +36,7 @@ class _MainApp extends State<MainApp> {
     "基本控件测试3",
     "测试BottomNavigation",
     "仿知乎demo",
+    "测试动画",
   ];
   final TextStyle _biggerFont = new TextStyle(fontSize: 18.0);
 
@@ -113,6 +115,8 @@ class _MainApp extends State<MainApp> {
           return BottomNavigationPage();
         case 8:
           return ZhiHuMainPage();
+        case 9:
+          return TestAnimation();
       }
     }));
   }
