@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/test/bean/notieManagerTest.dart';
+import 'package:flutter_app/test/bean/notie_manager_test.dart';
 import 'package:flutter_app/test/ui/test1.dart';
 import 'package:flutter_app/test/ui/test2.dart';
 import 'package:flutter_app/test/ui/test3.dart';
@@ -8,10 +8,10 @@ import 'package:flutter_app/zhihu_demo/ui/BottomNavigationPage.dart';
 import 'package:flutter_app/zhihu_demo/ui/ZhiHuMainPage.dart';
 import 'package:provider/provider.dart';
 
-import 'Test5App.dart';
-import 'Test6App.dart';
-import 'Test7App.dart';
-import 'TestAnimation.dart';
+import 'test/ui/Test5App.dart';
+import 'test/ui/Test6App.dart';
+import 'test/ui/Test7App.dart';
+import 'test/ui/TestAnimation.dart';
 
 void main() {
   runApp(MultiProvider(providers: [

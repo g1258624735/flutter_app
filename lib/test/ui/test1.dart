@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/test/bean/notieManagerTest.dart';
+import 'package:flutter_app/test/bean/notie_manager_test.dart';
 import 'package:provider/provider.dart';
 
 class MyAppTest1 extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return new MyHomePage(title: 'Flutter Demo Home Page');
@@ -12,24 +11,13 @@ class MyAppTest1 extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
-
   @override
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
+  //全局增加
   void _incrementCounter() {
     Provider.of<NoticeManagerTest>(context).add();
   }
@@ -41,7 +29,6 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text(widget.title),
       ),
       body: new Center(
-
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -52,14 +39,15 @@ class _MyHomePageState extends State<MyHomePage> {
               '${Provider.of<NoticeManagerTest>(context).count}',
               style: Theme.of(context).textTheme.display1,
             ),
+            RaisedButton(onPressed: _incrementCounter, child: Text("全局刷新增加")),
+            //局部刷新控件
+            Consumer(
+                builder: (context, NoticeManagerTest test, _) => Text(
+                    "局部刷新${Provider.of<NoticeManagerTest>(context).count}")),
+            RaisedButton(onPressed: _incrementCounter, child: Text("局部刷新增加")),
           ],
         ),
       ),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: new Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

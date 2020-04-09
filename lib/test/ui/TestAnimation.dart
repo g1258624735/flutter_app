@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
-
+//多动画集成demo
 class TestAnimation extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
