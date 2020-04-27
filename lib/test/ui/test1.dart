@@ -18,13 +18,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  NoticeManagerTest mNoticeManagerTest;
+
   //全局增加
   void _incrementCounter() {
-    Provider.of<NoticeManagerTest>(context).add();
+    mNoticeManagerTest.add();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+//    _count = mNoticeManagerTest.count;
   }
 
   @override
   Widget build(BuildContext context) {
+    mNoticeManagerTest = Provider.of<NoticeManagerTest>(context, listen: false);
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(widget.title),
@@ -36,19 +46,18 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             new Text(
-              '${Provider.of<NoticeManagerTest>(context).count}',
+              '${mNoticeManagerTest.count}',
               style: Theme.of(context).textTheme.display1,
             ),
             RaisedButton(onPressed: _incrementCounter, child: Text("全局刷新增加")),
             //局部刷新控件
-            Row(children: <Widget>[
-              Expanded(
-                  child: Text(
-                "------------------------------------------------局部刷新${Provider.of<NoticeManagerTest>(context).count}",
+            Consumer<NoticeManagerTest>(builder: (context, timerModel, _) {
+              return Text(
+                "局部刷新${timerModel.count}",
                 overflow: TextOverflow.ellipsis,
-              )),
-              RaisedButton(onPressed: _incrementCounter, child: Text("局部刷新增加"))
-            ])
+              );
+            }),
+            RaisedButton(onPressed: _incrementCounter, child: Text("局部刷新增加"))
           ],
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'Test7App_1.dart';
 import 'Test7App_2.dart';
+import 'Test7App_3.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -16,7 +17,7 @@ class Test7App extends StatefulWidget {
 }
 
 class Test7_1_App extends State<Test7App> {
-  List list = ["控件测试1", "控件测试2"];
+  List list = ["控件测试1", "控件测试2","控件测试3"];
   bool isCheck = false;
   bool isSwich = false;
   TabController _TabControl;
@@ -51,6 +52,7 @@ class Test7_1_App extends State<Test7App> {
       body: TabBarView(controller: _TabControl, children: <Widget>[
         Test7App_1(),
         Test7App_2(),
+        Test7App_3(),
       ]),
     );
   }
