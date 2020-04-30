@@ -1,6 +1,6 @@
-import 'package:circle_progress/circle_progress.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/test/widget/circle_progress_widget.dart';
+import 'package:flutter_app/test/widget/half_circle_progress_pointer_widget.dart';
+import 'package:flutter_app/test/widget/half_circle_progress_widget.dart';
 
 /// 本组件的测试类  -------------使用--TestStateful()--------------
 class CircleStateful extends StatefulWidget {
@@ -31,13 +31,31 @@ class _TestStatefulState extends State<CircleStateful>
 
   @override
   Widget build(BuildContext context) {
-    return MyCircleProgressWidget(
-        progress: MyProgress(
-            backgroundColor: Color(0xfff3f2f5),
-            value: animation.value,
-            radius: 90,
-            completeText: "100%",
-            color: Color(0xffF13333),
-            strokeWidth: 8));
+    return Column(
+      children: <Widget>[
+        HalfCircleProgressWidget(
+            progress: HalfProgress(
+                backgroundColor: Color(0xfff3f2f5),
+                value: animation.value,
+                radius: 80,
+                completeText: "100%",
+                color: Color(0xffF13333),
+                strokeWidth: 8)),
+        CirclePointerProgressWidget(
+            progress: PointerProgress(
+                backgroundColor: Color(0xfff3f2f5),
+                value: animation.value,
+                radius: 80,
+                completeText: "100%",
+                color: Color(0xffF13333),
+                strokeWidth: 8))
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }
