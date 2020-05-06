@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'FlareAnimation.dart';
 import 'Test7App_1.dart';
 import 'Test7App_2.dart';
 import 'Test7App_3.dart';
@@ -17,7 +18,7 @@ class Test7App extends StatefulWidget {
 }
 
 class Test7_1_App extends State<Test7App> {
-  List list = ["控件测试1", "控件测试2","控件测试3"];
+  List list = ["控件测试1", "控件测试2","控件测试3","动画测试"];
   bool isCheck = false;
   bool isSwich = false;
   TabController _TabControl;
@@ -53,6 +54,7 @@ class Test7_1_App extends State<Test7App> {
         Test7App_1(),
         Test7App_2(),
         Test7App_3(),
+        FlareAnimation(),
       ]),
     );
   }
