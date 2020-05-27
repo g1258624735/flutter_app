@@ -22,7 +22,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //全局增加
   void _incrementCounter() {
+//    Navigator.of(context).pop();
+
     mNoticeManagerTest.add();
+    showDialog(
+        context: context,
+        child: AlertDialog(
+          title: Text("提示"),
+          content: Text(""),
+          actions: <Widget>[
+            RaisedButton(
+              child: Text("确定"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          ],
+        ));
+    showDialog(
+        context: context,
+        child: AlertDialog(
+          title: Text("提示"),
+          content: Text(""),
+          actions: <Widget>[
+            RaisedButton(
+              child: Text("确定"),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+            )
+          ],
+        ));
   }
 
   @override
@@ -39,8 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: new Center(
+      body: new Container(
+        color: Colors.blue,
         child: new Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             new Text(
               'You have pushed the button this many times:',
@@ -57,7 +91,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 overflow: TextOverflow.ellipsis,
               );
             }),
-            RaisedButton(onPressed: _incrementCounter, child: Text("局部刷新增加"))
+            RaisedButton(onPressed: _incrementCounter, child: Text("局部刷新增加")),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Container(
+                  color: Colors.green,
+                  width: 50,
+                  height: 20,
+                ),
+                Container(color: Colors.red, width: 50, height: 20),
+                Container(color: Colors.blue, width: 50, height: 20)
+              ],
+            ),
+            Container(width: 40,child:Text("测试text换行测试text换行测试text换行",softWrap: true)),
           ],
         ),
       ),
