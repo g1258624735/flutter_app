@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/bean/notie_manager_test.dart';
+import 'package:flutter_app/test/ui/product_detail_page.dart';
 import 'package:flutter_app/test/ui/test1.dart';
 import 'package:flutter_app/test/ui/test2.dart';
 import 'package:flutter_app/test/ui/test3.dart';
@@ -98,7 +99,7 @@ class _MainApp extends State<MainApp> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       switch (index) {
         case 0:
-          return MyAppTest1();
+          return ProductDetailPage();
         case 1:
           return Test2App();
         case 2:
