@@ -59,12 +59,23 @@ class _FlareAnimationState extends State  {
         alignment: Alignment(0.0, 0.8),
         child: Mole(),
       ),
-      new Align(
+       Align(
         alignment: Alignment.bottomCenter,
         child: new Container(
           width: size,
           height: size,
           child: new FlareActor("file/flare_flutter_logo_.flr",
+              alignment: Alignment.topCenter,
+              fit: BoxFit.fill,
+              animation: "Placeholder"),
+        ),
+      ),
+      Align(
+        alignment: Alignment.bottomCenter,
+        child: new Container(
+          width: size,
+          height: size,
+          child: new FlareActor("file/Space-Demo.flr",
               alignment: Alignment.topCenter,
               fit: BoxFit.fill,
               animation: "Placeholder"),

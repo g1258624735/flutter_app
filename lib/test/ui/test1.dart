@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/bean/notie_manager_test.dart';
+import 'package:flutter_app/test/ui/test2.dart';
 import 'package:provider/provider.dart';
 
 class MyAppTest1 extends StatelessWidget {
@@ -25,36 +26,36 @@ class _MyHomePageState extends State<MyHomePage> {
 //    Navigator.of(context).pop();
 
     mNoticeManagerTest.add();
-    showDialog(
-        context: context,
-        child: AlertDialog(
-          title: Text("提示"),
-          content: Text(""),
-          actions: <Widget>[
-            RaisedButton(
-              child: Text("确定"),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            )
-          ],
-        ));
-    showDialog(
-        context: context,
-        child: AlertDialog(
-          title: Text("提示"),
-          content: Text(""),
-          actions: <Widget>[
-            RaisedButton(
-              child: Text("确定"),
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pop(context);
-                Navigator.pop(context);
-              },
-            )
-          ],
-        ));
+//    showDialog(
+//        context: context,
+//        child: AlertDialog(
+//          title: Text("提示"),
+//          content: Text(""),
+//          actions: <Widget>[
+//            RaisedButton(
+//              child: Text("确定"),
+//              onPressed: () {
+//                Navigator.pop(context);
+//              },
+//            )
+//          ],
+//        ));
+//    showDialog(
+//        context: context,
+//        child: AlertDialog(
+//          title: Text("提示"),
+//          content: Text(""),
+//          actions: <Widget>[
+//            RaisedButton(
+//              child: Text("确定"),
+//              onPressed: () {
+//                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+//                  return Test2App();
+//                }));
+//              },
+//            )
+//          ],
+//        ));
   }
 
   @override
@@ -67,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     mNoticeManagerTest = Provider.of<NoticeManagerTest>(context, listen: false);
+    print("刷新了");
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(widget.title),
@@ -104,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(color: Colors.blue, width: 50, height: 20)
               ],
             ),
-            Container(width: 40,child:Text("测试text换行测试text换行测试text换行",softWrap: true)),
+            Container(width: 40,child:Text("测试text换行",softWrap: true)),
           ],
         ),
       ),
