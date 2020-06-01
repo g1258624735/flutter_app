@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text(widget.title),
       ),
       body: new Container(
-        color: Colors.blue,
+        color: Colors.white,
         child: new Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -107,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             Container(width: 40,child:Text("测试text换行",softWrap: true)),
+            Container(color:Colors.green,child: TextField(textAlign: TextAlign.center,),)
           ],
         ),
       ),
