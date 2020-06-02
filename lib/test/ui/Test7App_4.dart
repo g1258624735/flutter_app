@@ -14,61 +14,64 @@ class Test7App_4 extends StatefulWidget {
 class _Test7App_4_1 extends State with SingleTickerProviderStateMixin {
   ScrollController _scrollController = ScrollController();
   Timer _timer;
-  int i = 1;
-  double width;
-  double itemWidth = 120;
+  int i = 0;
+  double width = 0;
+  double itemWidth = 180;
+  int count = 5;
+  bool enableScroll = false; //是否允许滑动
   @override
   void initState() {
     super.initState();
-    //获取屏幕宽度
-    width = window.physicalSize.width;
-    int count = 9;
-    int number = width ~/ itemWidth; //模数
-    double other = itemWidth - width % itemWidth; //余数
-    int enableNum = count - number;
-    print("width="+width.toString());
-    print("enableNum="+enableNum.toString());
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      double scrollWidth= itemWidth*i;
-      if(i==enableNum){
-        scrollWidth = itemWidth*(i-1)+other;
-      }
-      _scrollController.animateTo(scrollWidth,
-          duration: new Duration(milliseconds: 200), curve: Curves.ease);
-      i++;
-      if(i==enableNum){
-        i=0;
-      }
-    });
+    //获取屏幕宽度 px 转 dp
+    width = window.physicalSize.width / 2;
+    enableScroll = count * itemWidth >= width;
+    if(enableScroll) {
+      int number = width ~/ itemWidth; //模数
+      double other = itemWidth - width % itemWidth; //余数
+      int enableNum = count - number;
+      print("width=" + width.toString());
+      print("enableNum=" + enableNum.toString());
+      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+        double scrollWidth = itemWidth * i;
+        if (i == enableNum) {
+          scrollWidth = itemWidth * (i - 1) + other;
+        }
+        _scrollController.animateTo(scrollWidth,
+            duration: new Duration(milliseconds: 200), curve: Curves.ease);
+        i++;
+        if (i == enableNum + 1) {
+          i = 0;
+        }
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         body: Column(
-        children: <Widget>[Text("测试可水平自动滑动listView"), _getListView()]));
+            children: <Widget>[Text("测试可水平自动滑动listView"), _getListView()]));
   }
-//  SizedBox(
-//  width: 120,
-//  height: 120,
-//  child: ClipRRect(
-//  borderRadius: BorderRadius.circular(5),
-//  child: FadeInImage.assetNetwork(
-//  placeholder: "assets/images/icon_default.png",
-//  image:
-//  "https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&fm=26&gp=0.jpg",
-//  fit: BoxFit.cover,
-//  ),
-//  )),
+
+//
   Widget _getListView() {
     return SizedBox(
         height: 120,
         width: double.infinity,
         child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            controller: _scrollController,
-          ));
+          scrollDirection: Axis.horizontal,
+          controller: _scrollController,
+          itemBuilder: (context, index) {
+            var colors = [Colors.green, Colors.blue, Colors.red, Colors.yellow];
+            return Container(
+                width: itemWidth,
+                height: itemWidth,
+                alignment: Alignment.center,
+                color: colors[index % 3],
+                child: Text("$index"));
+          },
+          itemCount: count,
+        ));
   }
 
   @override
