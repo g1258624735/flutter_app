@@ -26,7 +26,6 @@ class Test7_1_App extends State<Test7App> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _TabControl =
         new TabController(length: list.length, vsync: ScrollableState());
@@ -34,15 +33,13 @@ class Test7_1_App extends State<Test7App> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new Scaffold(
-      //todo 导航栏
       key: scaffoldKey,
       appBar: new AppBar(
           title: new Text("基本测试控件3"),
           bottom: TabBar(
             tabs: list.map((t) {
-              return new Text(t);
+              return Container(child: Text(t,style: TextStyle(color: Colors.white))) ;
             }).toList(),
             controller: _TabControl,
             indicatorColor: Colors.white,
@@ -50,7 +47,6 @@ class Test7_1_App extends State<Test7App> {
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorWeight: 3.0,
           )),
-      //todo 垂直布局
       body: TabBarView(controller: _TabControl, children: <Widget>[
         Test7App_1(),
         Test7App_2(),

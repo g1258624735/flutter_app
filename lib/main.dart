@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/bean/notie_manager_test.dart';
+import 'package:flutter_app/test/testui/BrandDetailPage.dart';
+import 'package:flutter_app/test/ui/Test.dart';
 import 'package:flutter_app/test/ui/Test7App_4.dart';
+import 'package:flutter_app/test/ui/Test8App.dart';
 import 'package:flutter_app/test/ui/product_detail_page.dart';
 import 'package:flutter_app/test/ui/test1.dart';
 import 'package:flutter_app/test/ui/test2.dart';
@@ -49,6 +52,8 @@ class _MainApp extends State<MainApp> {
         theme: new ThemeData(
           primarySwatch: Colors.blueGrey,
           primaryColor: Color(0xFFC91B3A),
+//          splashColor: Color(0x00000000),
+//          highlightColor: Color(0x00000000),
           backgroundColor: Color(0xFFC91B3A),
           accentColor: Color(0xFF888888),
         ),
@@ -100,7 +105,7 @@ class _MainApp extends State<MainApp> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       switch (index) {
         case 0:
-          return Test7App_4();
+          return MyTestApp();
         case 1:
           return Test2App();
         case 2:
