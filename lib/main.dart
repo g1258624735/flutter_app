@@ -51,11 +51,11 @@ class _MainApp extends State<MainApp> {
         title: 'Startup Name Generator',
         theme: new ThemeData(
           primarySwatch: Colors.blueGrey,
-          primaryColor: Color(0xFFC91B3A),
+          accentColor: Colors.red,
+          primaryColor: Colors.white,
 //          splashColor: Color(0x00000000),
 //          highlightColor: Color(0x00000000),
-          backgroundColor: Color(0xFFC91B3A),
-          accentColor: Color(0xFF888888),
+//          backgroundColor: Color(0xFFC91B3A),
         ),
         home: Scaffold(
           appBar: AppBar(title: Text("首页")),
@@ -72,8 +72,16 @@ class _MainApp extends State<MainApp> {
   }
 
   Widget _buildSuggestions(BuildContext context) {
-    return new ListView.builder(
+    return RefreshIndicator(
+      onRefresh: () {
+        return Future.delayed(Duration(milliseconds: 600), () {
+
+        });
+      },
+      child: ListView.builder(
+      physics: ClampingScrollPhysics(),
       padding: const EdgeInsets.all(16.0),
+      controller: ScrollController(keepScrollOffset:false ),
       itemBuilder: (context, i) {
         if (i.isOdd) return new Divider();
         final index = i ~/ 2;
@@ -81,7 +89,7 @@ class _MainApp extends State<MainApp> {
       },
       itemCount: list.length * 2,
 //      scrollDirection: Axis.horizontal,//水平布局
-    );
+    ));
   }
 
   Widget _buildRow(BuildContext context, String pair, int index) {

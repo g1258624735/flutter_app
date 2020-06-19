@@ -1,13 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/test/widget/custom_refresh_controller.dart';
+import 'package:flutter_app/test/widget/custom_refresh_page.dart';
 
 class MyTestApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(),
-    );
+    return  Scaffold(
+        body: Home(),
+      );
   }
 }
 
@@ -49,41 +51,65 @@ class _SliverDelegate extends SliverPersistentHeaderDelegate {
   }
 }
 
-class HomeState extends State<Home> with SingleTickerProviderStateMixin {
+class HomeState extends State<Home>  {
   TabController tabController;
-
+  ScrollController scrollController = new ScrollController();
+  CustomRefreshController customRefreshController =
+  new CustomRefreshController();
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+    tabController = TabController(length: 3, vsync: ScrollableState());
+    customRefreshController.setOnRefreshListener(() {
+      print("下拉刷新了");
+      Future.delayed(Duration(milliseconds: 1000),(){
+        customRefreshController.closeRefresh();
+      });
+    });
+    customRefreshController.setOnLoadMoreListener(() {
+      print("上拉加载刷新了");
+      Future.delayed(Duration(milliseconds: 1000),(){
+        customRefreshController.closeLoadMore();
+      });
+    });
+    customRefreshController.setOnRefreshFinishListener(() {
+      print("下拉刷新结束了");
+    });
+    customRefreshController.setOnScrollListener(
+            (double scrollPixe, double totalScrollPixe, bool toDown) {
+//          print("滑动兼听 $scrollPixe  $toDown ");
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
+      body: CustomRefreshPage(
+        useShowLoadMore: true,
+        customRefreshController: customRefreshController,
+          child: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
-            SliverAppBar(
-              leading: IconButton(
-                icon: Image.asset("assets/images/back_white.png"),
-                padding: EdgeInsets.all(12),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-              title: Container(
-                  alignment: Alignment.center,
-                  child:Text("标题",style: TextStyle(color: Colors.black),),
-                  width: double.infinity),
-              elevation: 0.2,
-              pinned: true,
-              backgroundColor: Color(0xffF3F2F5),
-              flexibleSpace: FlexibleSpaceBar(
-                //伸展处布局
-                collapseMode: CollapseMode.pin, //视差效果
-                centerTitle: true,
-                background: DummySection(color: Colors.red,height: 40,),
-              ),
-            ),
+//            SliverAppBar(
+//              leading: IconButton(
+//                icon: Image.asset("assets/images/back_white.png"),
+//                padding: EdgeInsets.all(12),
+//                onPressed: () => Navigator.of(context).pop(),
+//              ),
+//              title: Container(
+//                  alignment: Alignment.center,
+//                  child:Text("标题",style: TextStyle(color: Colors.black),),
+//                  width: double.infinity),
+//              elevation: 0.2,
+//              pinned: true,
+//              backgroundColor: Color(0xffF3F2F5),
+//              flexibleSpace: FlexibleSpaceBar(
+//                //伸展处布局
+//                collapseMode: CollapseMode.pin, //视差效果
+//                centerTitle: true,
+//                background: DummySection(color: Colors.red,height: 40,),
+//              ),
+//            ),
             SliverList(
                 delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
@@ -94,7 +120,7 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   child: Text("hello"),
                 ),
               );
-            }, childCount: 10)),
+            }, childCount: 2)),
             SliverPersistentHeader(
                 pinned: true,
                 delegate: _SliverDelegate(
@@ -130,7 +156,7 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }
@@ -157,7 +183,7 @@ class DummyList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       shrinkWrap: true,
-      physics: ClampingScrollPhysics(),
+      physics: BouncingScrollPhysics(),
       children: <Widget>[
         Card(
           child: Container(
@@ -188,6 +214,37 @@ class DummyList extends StatelessWidget {
           ),
         ),
         Card(
+          child: Container(
+            height: 200.0,
+            alignment: Alignment.center,
+            child: Text("hello"),
+          ),
+        ),
+        Card(
+          child: Container(
+            height: 200.0,
+            alignment: Alignment.center,
+            child: Text("hello"),
+          ),
+        ), Card(
+          child: Container(
+            height: 200.0,
+            alignment: Alignment.center,
+            child: Text("hello"),
+          ),
+        ), Card(
+          child: Container(
+            height: 200.0,
+            alignment: Alignment.center,
+            child: Text("hello"),
+          ),
+        ), Card(
+          child: Container(
+            height: 200.0,
+            alignment: Alignment.center,
+            child: Text("hello"),
+          ),
+        ), Card(
           child: Container(
             height: 200.0,
             alignment: Alignment.center,
