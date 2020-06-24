@@ -113,7 +113,7 @@ class _MainApp extends State<MainApp> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       switch (index) {
         case 0:
-          return MyTestApp();
+          return MyAppTest1();
         case 1:
           return Test2App();
         case 2:
