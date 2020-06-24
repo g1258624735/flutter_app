@@ -4,6 +4,7 @@ import 'package:flutter_app/test/testui/BrandDetailPage.dart';
 import 'package:flutter_app/test/ui/Test.dart';
 import 'package:flutter_app/test/ui/Test7App_4.dart';
 import 'package:flutter_app/test/ui/Test8App.dart';
+import 'package:flutter_app/test/ui/Test_.dart';
 import 'package:flutter_app/test/ui/product_detail_page.dart';
 import 'package:flutter_app/test/ui/test1.dart';
 import 'package:flutter_app/test/ui/test2.dart';
@@ -113,7 +114,7 @@ class _MainApp extends State<MainApp> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       switch (index) {
         case 0:
-          return MyAppTest1();
+          return MyTestApp_();
         case 1:
           return Test2App();
         case 2:

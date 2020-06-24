@@ -7,6 +7,7 @@ import 'custom_refresh_state.dart';
 export 'custom_refresh_controller.dart';
 export 'custom_refresh_state.dart';
 
+// ignore: must_be_immutable
 class CustomRefreshPage extends StatefulWidget {
   ///子控件
   Widget child;
@@ -120,11 +121,11 @@ class _CustomRefreshPageState extends State<CustomRefreshPage> {
 
 //            print(
 //                "是否越过边界 $outOfRange 当前位置 $pixels 是否在顶部或底部$atEdge 视口底部距离列表底部 $extentAfter 视口顶部距离列表顶部有多大 $extentBefore 列表长度 $extentInside");
-            print('------------------------');
+//            print('------------------------');
 
             if (outOfRange) {
               //重新构建
-              controllNotification(notification);
+              controlNotification(notification);
             }
             return false;
           },
@@ -268,13 +269,13 @@ class _CustomRefreshPageState extends State<CustomRefreshPage> {
   }
 
   ///日志输出
-  void logd(String message) {
-    if (widget.isRefreshLog) {
-      print("----【刷新组件】 $message");
-    }
-  }
+//  void logd(String message) {
+//    if (widget.isRefreshLog) {
+////      print("----【刷新组件】 $message");
+//    }
+//  }
 
-  void controllNotification(ScrollNotification notification) {
+  void controlNotification(ScrollNotification notification) {
     ///当前滑动的距离
     double scrollPixe = notification.metrics.pixels;
 
@@ -340,7 +341,7 @@ class _CustomRefreshPageState extends State<CustomRefreshPage> {
       if (flagScrollPixe > 0) {
         ///向下滑动
         ///正常向下滑动
-        logd("向下");
+//        logd("向下");
 
         ///设置回调
         if (widget.customRefreshController != null &&
@@ -350,7 +351,7 @@ class _CustomRefreshPageState extends State<CustomRefreshPage> {
         }
       } else {
         ///向上滑动
-        logd("向上");
+//        logd("向上");
 
         ///设置回调
         if (widget.customRefreshController != null &&
