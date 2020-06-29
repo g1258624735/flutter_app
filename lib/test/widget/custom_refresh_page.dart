@@ -55,7 +55,7 @@ class _CustomRefreshPageState extends State<CustomRefreshPage> {
   CustomRefreshController customRefreshController;
 
   ///用于计算的最大下拉距离
-  double defaultHeight = 40;
+  double defaultHeight = 70;
 
   double defaultFooterHeight = 40;
 

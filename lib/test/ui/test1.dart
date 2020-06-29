@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/bean/notie_manager_test.dart';
 import 'package:provider/provider.dart';
+
+import 'easy_appbar.dart';
 class MyAppTest1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -113,7 +115,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.white,
               ),
               child:Icon( IconData(0xe602, fontFamily: 'aliIcon'),color: Colors.blue,size: 70.0)),
-          Icon(Icons.menu,color: Colors.blue,size: 70.0)
+          Icon(Icons.menu,color: Colors.blue,size: 70.0),
+          Container(
+            child: Image.asset("assets/image/img.png",height: 40,width: 40),
+          ),
+          EasyAppBar(title: "首页",),
 
         ]),
       ),

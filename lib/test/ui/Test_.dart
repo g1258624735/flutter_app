@@ -5,6 +5,7 @@ import 'package:flutter_app/test/widget/custom_refresh_controller.dart';
 import 'package:flutter_app/test/widget/custom_refresh_page.dart';
 
 import 'Test.dart';
+import 'Test__1.dart';
 
 ///测试滑动嵌套控件
 class MyTestApp_ extends StatelessWidget {
@@ -58,7 +59,7 @@ class HomeState extends State<Home> {
           Expanded(child:
           TabBarView(
               controller: tabController,
-              children: [MyTestApp(), MyTestApp(), MyTestApp()],
+              children: [MyTest11App(), MyTest11App(), MyTest11App()],
               physics: NeverScrollableScrollPhysics()),
           )]));
   }
