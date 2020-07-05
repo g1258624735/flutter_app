@@ -1,10 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/test/ui/refresh_indicator.dart';
-import 'package:flutter_app/test/widget/custom_refresh_controller.dart';
-import 'package:flutter_app/test/widget/custom_refresh_page.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_app/test/widget/MyNestedScrollView.dart';
 
 ///测试滑动嵌套控件  NestedScrollView  下拉刷新
 class MyTest11App extends StatelessWidget {
@@ -26,32 +23,51 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   TabController tabController;
   ScrollController scrollController = new ScrollController();
-  EasyRefreshController _controller = EasyRefreshController();
-
+  GlobalKey<MyNestedScrollViewState> magicNavBarSearchKey = GlobalKey();
+  bool isLoad= false;
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 3, vsync: ScrollableState());
     scrollController.addListener(() {
-      print(scrollController.position.pixels.toString() +
-          "|" +
-          scrollController.position.maxScrollExtent.toString());
-      if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent) {
-        _controller.finishRefresh(success: true);
-      }
+//      print(scrollController.position.pixels.toString() +
+//          "|" +
+//          scrollController.position.maxScrollExtent.toString());
+//      if (scrollController.position.pixels ==
+//          scrollController.position.maxScrollExtent) {
+//        print("滑动到底部。。。");
+//      }
+    if(!isLoad) {
+      isLoad= true;
+      MyNestedScrollViewState state = magicNavBarSearchKey.currentState;
+      state.innerController.addListener(() {
+        if (state.innerController.position.pixels ==
+            state.innerController.position.maxScrollExtent) {
+          print("innerController滑动到底部。。。");
+        }
+      });
+    }
     });
+
+
+//    MyNestedScrollViewState state = magicNavBarSearchKey.currentState;
+//      state.outerController.addListener(() {
+//        if (scrollController.position.pixels ==
+//            scrollController.position.maxScrollExtent) {
+//          print("innerController滑动到底部。。。");
+//        }
+//      });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: getView(),
+      body: getChildView(),
     );
   }
 
   Widget getView() {
-    return RefreshIndicator2(
+    return RefreshIndicator(
         notificationPredicate: (notification) {
           return true;
         },
@@ -64,8 +80,8 @@ class HomeState extends State<Home> {
   }
 
   Widget getChildView() {
-    return NestedScrollView(
-      physics: BouncingScrollPhysics(),
+    MyNestedScrollView widget = MyNestedScrollView(key: magicNavBarSearchKey,
+//      physics: BouncingScrollPhysics(),
       controller: scrollController,
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
@@ -100,29 +116,29 @@ class HomeState extends State<Home> {
               ),
             );
           }, childCount: 4)),
-          SliverPersistentHeader(
-              pinned: false,
-              delegate: _SliverDelegate(
-                  minHeight: 50.0,
-                  maxHeight: 50.0,
-                  child: Container(
-                      color: Colors.white,
-                      child: TabBar(
-                        unselectedLabelColor: Colors.blue[100],
-                        indicator: BoxDecoration(color: Colors.lightBlue),
-                        controller: tabController,
-                        tabs: <Widget>[
-                          Tab(
-                            text: "Home",
-                          ),
-                          Tab(
-                            text: "Fav",
-                          ),
-                          Tab(
-                            text: "Star",
-                          )
-                        ],
-                      ))))
+//          SliverPersistentHeader(
+//              pinned: false,
+//              delegate: _SliverDelegate(
+//                  minHeight: 50.0,
+//                  maxHeight: 50.0,
+//                  child: Container(
+//                      color: Colors.white,
+//                      child: TabBar(
+//                        unselectedLabelColor: Colors.blue[100],
+//                        indicator: BoxDecoration(color: Colors.lightBlue),
+//                        controller: tabController,
+//                        tabs: <Widget>[
+//                          Tab(
+//                            text: "Home",
+//                          ),
+//                          Tab(
+//                            text: "Fav",
+//                          ),
+//                          Tab(
+//                            text: "Star",
+//                          )
+//                        ],
+//                      ))))
         ];
       },
       body: Container(
@@ -154,7 +170,9 @@ class HomeState extends State<Home> {
         ),
       ),
     );
+    return widget;
   }
+
 }
 
 // Dummy List Container
@@ -203,13 +221,41 @@ class _SliverDelegate extends SliverPersistentHeaderDelegate {
         child != oldDelegate.child;
   }
 }
+class DummyListTop extends StatefulWidget {
 
+  @override
+  State<StatefulWidget> createState() {
+    return DummyListStateTop();
+  }
+}
 // Dummy Listing for tab
-class DummyList extends StatelessWidget {
+class DummyList extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState() {
+   return DummyListState();
+  }
+}
+class DummyListState extends State {
+  ScrollController scrollController = new ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() {
+//      print(scrollController.position.pixels.toString() +
+//          "|" +
+//          scrollController.position.maxScrollExtent.toString());
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        print("滑动到底部。。。");
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return ListView(
       shrinkWrap: true,
+//      controller: scrollController,
       physics: ClampingScrollPhysics(),
       children: <Widget>[
         Card(
@@ -285,4 +331,54 @@ class DummyList extends StatelessWidget {
       ],
     );
   }
+
+}
+class DummyListStateTop extends State {
+  ScrollController scrollController = new ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() {
+//      print(scrollController.position.pixels.toString() +
+//          "|" +
+//          scrollController.position.maxScrollExtent.toString());
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        print("滑动到底部。。。");
+      }
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      shrinkWrap: true,
+//      controller: scrollController,
+      physics: BouncingScrollPhysics(),
+      children: <Widget>[
+        Card(
+          child: Container(
+            height: 100.0,
+            alignment: Alignment.center,
+            child: Text("hello"),
+          ),
+        ),
+        Card(
+          child: Container(
+            height: 100.0,
+            alignment: Alignment.center,
+            child: Text("hello"),
+          ),
+        ),
+        Card(
+          child: Container(
+            height: 100.0,
+            alignment: Alignment.center,
+            child: Text("hello"),
+          ),
+        ),
+
+      ],
+    );
+  }
+
 }
