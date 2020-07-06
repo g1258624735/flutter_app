@@ -3,6 +3,7 @@ import 'package:flutter_app/test/bean/notie_manager_test.dart';
 import 'package:provider/provider.dart';
 
 import 'easy_appbar.dart';
+
 class MyAppTest1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -105,22 +106,26 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           Container(width: 40, child: Text("测试text换行", softWrap: true)),
-          Container(
-              width: 70,
-              height: 70,
-              alignment: Alignment.center,
-              padding: EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(35)),
-                color: Colors.white,
-              ),
-              child:Icon( IconData(0xe602, fontFamily: 'aliIcon'),color: Colors.blue,size: 70.0)),
-          Icon(Icons.menu,color: Colors.blue,size: 70.0),
-          Container(
-            child: Image.asset("assets/image/img.png",height: 40,width: 40),
+//          EasyAppBar(
+//            title: "首页",
+//          ),
+          Row(
+            children: <Widget>[
+              Container(
+                  width: 160,
+                  height: 82,
+                  color: Colors.green,
+                  child: Image.asset("assets/image/bg_youhuiquan_you02_sel_s.png",color: Colors.white,fit: BoxFit.fill)),
+              Container(
+                  width: 82,
+                  height: 82,
+                  color: Colors.green,
+                  margin: EdgeInsets.only(top: 10),
+                  child: Icon(IconData(0xe615, fontFamily: 'aliIcon'),
+                      color: Colors.red, size: 82))
+            ],
           ),
-          EasyAppBar(title: "首页",),
-
+          Text("0xe611", style: TextStyle(fontFamily: 'aliIcon')),
         ]),
       ),
     );

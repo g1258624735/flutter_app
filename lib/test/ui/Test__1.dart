@@ -51,7 +51,7 @@ class HomeState extends State<Home> {
   }
 
   Widget getView() {
-    return RefreshIndicator2(
+    return RefreshIndicatorNestedScrollView(
         notificationPredicate: (notification) {
           return true;
         },
