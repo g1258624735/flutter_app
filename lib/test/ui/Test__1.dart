@@ -84,8 +84,8 @@ class HomeState extends State<Home> {
 //              backgroundColor: Color(0xffF3F2F5),
 //              flexibleSpace: FlexibleSpaceBar(
 //                //伸展处布局
-//                collapseMode: CollapseMode.pin, //视差效果
-//                centerTitle: true,
+//                collapseMode : CollapseMode.pin, //视差效果
+////                centerTitle:true,
 //                background: DummySection(color: Colors.red,height: 40,),
 //              ),
 //            ),
