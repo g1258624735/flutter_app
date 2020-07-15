@@ -2,12 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/ui/refresh_indicator.dart';
-import 'package:flutter_app/test/widget/custom_refresh_controller.dart';
-import 'package:flutter_app/test/widget/custom_refresh_page.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:waterfall_flow/waterfall_flow.dart';
 
 ///测试滑动嵌套控件  NestedScrollView  下拉刷新
-class MyTest11App extends StatelessWidget {
+class MyTest1_2App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -208,44 +207,36 @@ class _SliverDelegate extends SliverPersistentHeaderDelegate {
 class DummyList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: double.infinity,
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Expanded(
-                  child: Container(
-                      width: 160,
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: Container(
-                              width: 160,
-                              height: 120.0,
-                              alignment: Alignment.center,
-                              child: Text("hello"),
-                            ),
-                          );
-                        },
-                        itemCount: 10,
-                        physics: ClampingScrollPhysics(),
-                      ))),
-              Container(
-                  width: 160,
-                  child: ListView.builder(
-                    itemBuilder: (context, index) {
-                      return Card(
-                        child: Container(
-                          width: 160,
-                          height: 200.0,
-                          alignment: Alignment.center,
-                          child: Text("hello"),
-                        ),
-                      );
-                    },
-                    itemCount: 10,
-                    physics: ClampingScrollPhysics(),
-                  ))
-            ]));
+    return WaterfallFlow.builder(
+        //cacheExtent: 0.0,
+        padding: EdgeInsets.all(5.0),
+    itemCount: 10,
+    itemBuilder:(context, index) {
+      return Card(
+        child: Container(
+          width: 160,
+          height: 120.0,
+          alignment: Alignment.center,
+          child: Text("hello"),
+        ),
+      );
+    },
+    gridDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 2,
+    crossAxisSpacing: 5.0,
+    mainAxisSpacing: 5.0,
+    /// follow max child trailing layout offset and layout with full cross axis extend
+    /// last child as loadmore item/no more item in [GridView] and [WaterfallFlow]
+    /// with full cross axis extend
+    //  LastChildLayoutType.fullCrossAxisExtend,
+
+    /// as foot at trailing and layout with full cross axis extend
+    /// show no more item at trailing when children are not full of viewport
+    /// if children is full of viewport, it's the same as fullCrossAxisExtend
+    //  LastChildLayoutType.foot,
+    lastChildLayoutTypeBuilder: (index) => index == 10
+    ? LastChildLayoutType.foot
+        : LastChildLayoutType.none,
+    ));
   }
 }
