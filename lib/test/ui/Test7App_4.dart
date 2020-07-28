@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-///水平花滑动listView
+///可水平自动滑动的 listView
 class Test7App_4 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

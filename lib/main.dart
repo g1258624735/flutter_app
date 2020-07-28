@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/bean/notie_manager_test.dart';
-import 'package:flutter_app/test/testui/BrandDetailPage.dart';
-import 'package:flutter_app/test/ui/Test.dart';
-import 'package:flutter_app/test/ui/Test7App_4.dart';
-import 'package:flutter_app/test/ui/Test8App.dart';
+import 'package:flutter_app/test/ui/Test7App_6.dart';
+import 'package:flutter_app/test/ui/Test7App_7.dart';
 import 'package:flutter_app/test/ui/Test_.dart';
-import 'package:flutter_app/test/ui/Test__1.dart';
-import 'package:flutter_app/test/ui/home_page2.dart';
-import 'package:flutter_app/test/ui/product_detail_page.dart';
-import 'package:flutter_app/test/ui/test1.dart';
 import 'package:flutter_app/test/ui/test2.dart';
 import 'package:flutter_app/test/ui/test3.dart';
 import 'package:flutter_app/test/ui/test4HttpNet.dart';
+import 'package:flutter_app/test/ui/test_nest_scroll_view2.dart';
 import 'package:flutter_app/zhihu_demo/ui/BottomNavigationPage.dart';
 import 'package:flutter_app/zhihu_demo/ui/ZhiHuMainPage.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +50,7 @@ class _MainApp extends State<MainApp> {
         theme: new ThemeData(
           primarySwatch: Colors.blueGrey,
           accentColor: Colors.red,
-          primaryColor: Colors.white,
+          primaryColor: Colors.redAccent,
 //          splashColor: Color(0x00000000),
 //          highlightColor: Color(0x00000000),
 //          backgroundColor: Color(0xFFC91B3A),
@@ -96,10 +91,7 @@ class _MainApp extends State<MainApp> {
   }
 
   Widget _buildRow(BuildContext context, String pair, int index) {
-    return new Dismissible(
-        key: new Key("$index"),
-//        onDismissed: (direction) => list.removeAt(index),
-        child: new ListTile(
+    return ListTile(
           title: new Text(
             pair,
             style: _biggerFont,
@@ -107,7 +99,7 @@ class _MainApp extends State<MainApp> {
           onTap: () {
             _toNextPage(context, index);
           },
-        ));
+        );
   }
 
   ///跳转到下一页
@@ -116,7 +108,7 @@ class _MainApp extends State<MainApp> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       switch (index) {
         case 0:
-          return MyTestApp_();
+          return Test7App7();
         case 1:
           return Test2App();
         case 2:

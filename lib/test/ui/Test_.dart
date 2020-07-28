@@ -1,12 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/test/widget/custom_refresh_controller.dart';
-import 'package:flutter_app/test/widget/custom_refresh_page.dart';
-
-import 'Test.dart';
-import 'Test__1.dart';
-import 'Test__2.dart';
+import 'package:flutter_app/test/ui/test_nest_scroll_view2.dart';
 
 ///测试滑动嵌套控件
 class MyTestApp_ extends StatelessWidget {
@@ -60,7 +55,7 @@ class HomeState extends State<Home> {
           Expanded(child:
           TabBarView(
               controller: tabController,
-              children: [MyTest1_2App(), MyTest1_2App(), MyTest1_2App()],
+              children: [TestNestScrollView2App(), TestNestScrollView2App(), TestNestScrollView2App()],
               physics: NeverScrollableScrollPhysics()),
           )]));
   }

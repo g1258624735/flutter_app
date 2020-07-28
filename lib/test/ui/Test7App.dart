@@ -5,6 +5,7 @@ import 'Test7App_1.dart';
 import 'Test7App_2.dart';
 import 'Test7App_3.dart';
 import 'Test7App_4.dart';
+import 'Test7App_5.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -19,7 +20,7 @@ class Test7App extends StatefulWidget {
 }
 
 class Test7_1_App extends State<Test7App> {
-  List list = ["控件测试1", "控件测试2","控件测试3","动画测试","水平滑动ListView"];
+  List list = ["控件测试1", "控件测试2","控件测试3","动画测试","水平滑动ListView","测试Sliver"];
   bool isCheck = false;
   bool isSwich = false;
   TabController _TabControl;
@@ -53,6 +54,7 @@ class Test7_1_App extends State<Test7App> {
         Test7App_3(),
         FlareAnimation(),
         Test7App_4(),
+        Test7App_5(),
       ]),
     );
   }
