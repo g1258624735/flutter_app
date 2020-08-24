@@ -11,6 +11,9 @@ class MyTest11App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("测试滑动"),
+      ),
       body: Home(),
     );
   }
@@ -24,30 +27,58 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+  TabController tabControllerParent;
   TabController tabController;
   ScrollController scrollController = new ScrollController();
-  EasyRefreshController _controller = EasyRefreshController();
+  ScrollController scrollControllerParent = new ScrollController();
 
   @override
   void initState() {
     super.initState();
+    tabControllerParent = TabController(length: 3, vsync: ScrollableState());
     tabController = TabController(length: 3, vsync: ScrollableState());
     scrollController.addListener(() {
-//      print(scrollController.position.pixels.toString() +
-//          "|" +
-//          scrollController.position.maxScrollExtent.toString());
-//      if (scrollController.position.pixels ==
-//          scrollController.position.maxScrollExtent) {
-//        _controller.finishRefresh(success: true);
-//      }
+      double offset = scrollController.position.pixels;
+      scrollControllerParent.jumpTo(offset);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: getView(),
-    );
+        body: Stack(children: <Widget>[
+      CustomScrollView(
+        controller: scrollControllerParent,
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+            child: Container(
+                color: Colors.white,
+                height: 1920 * 2.0,
+                alignment: Alignment.topCenter,
+                child: TabBar(
+                  unselectedLabelColor: Colors.blue[100],
+                  indicator: BoxDecoration(color: Colors.lightBlue),
+                  controller: tabControllerParent,
+                  tabs: <Widget>[
+                    Tab(
+                      text: "页面一",
+                    ),
+                    Tab(
+                      text: "页面二",
+                    ),
+                    Tab(
+                      text: "页面三",
+                    )
+                  ],
+                )),
+          )
+        ],
+      ),
+      TabBarView(
+        controller: tabControllerParent,
+        children: <Widget>[getView(), getView(), getView()],
+      ),
+    ]));
   }
 
   Widget getView() {
@@ -88,17 +119,43 @@ class HomeState extends State<Home> {
 //                background: DummySection(color: Colors.red,height: 40,),
 //              ),
 //            ),
-          SliverList(
-              delegate:
-                  SliverChildBuilderDelegate((BuildContext context, int index) {
-            return Card(
-              child: Container(
-                height: 50.0,
-                alignment: Alignment.center,
-                child: Text("hello"),
-              ),
-            );
-          }, childCount: 4)),
+//
+//          SliverPersistentHeader(
+//              pinned: false,
+//              delegate: _SliverDelegate(
+//                  minHeight: 50.0,
+//                  maxHeight: 50.0,
+//                  child: Container(
+//                      color: Colors.white,
+//                      child: TabBar(
+//                        unselectedLabelColor: Colors.blue[100],
+//                        indicator: BoxDecoration(color: Colors.lightBlue),
+//                        controller: tabController,
+//                        tabs: <Widget>[
+//                          Tab(
+//                            text: "Home",
+//                          ),
+//                          Tab(
+//                            text: "Fav",
+//                          ),
+//                          Tab(
+//                            text: "Star",
+//                          )
+//                        ],
+//                      )))),
+          SliverPadding(
+              padding: EdgeInsets.only(top: 48),
+              sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                return Card(
+                  child: Container(
+                    height: 50.0,
+                    alignment: Alignment.center,
+                    child: Text("hello"),
+                  ),
+                );
+              }, childCount: 4))),
           SliverPersistentHeader(
               pinned: true,
               delegate: _SliverDelegate(
@@ -209,43 +266,22 @@ class DummyList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: double.infinity,
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Expanded(
-                  child: Container(
-                      width: 160,
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: Container(
-                              width: 160,
-                              height: 120.0,
-                              alignment: Alignment.center,
-                              child: Text("hello"),
-                            ),
-                          );
-                        },
-                        itemCount: 10,
-                        physics: ClampingScrollPhysics(),
-                      ))),
-              Container(
-                  width: 160,
-                  child: ListView.builder(
-                    itemBuilder: (context, index) {
-                      return Card(
-                        child: Container(
-                          width: 160,
-                          height: 200.0,
-                          alignment: Alignment.center,
-                          child: Text("hello"),
-                        ),
-                      );
-                    },
-                    itemCount: 10,
-                    physics: ClampingScrollPhysics(),
-                  ))
-            ]));
+      width: double.infinity,
+      child: Container(
+          child: ListView.builder(
+        itemBuilder: (context, index) {
+          return Card(
+            child: Container(
+              width: double.infinity,
+              height: 120.0,
+              alignment: Alignment.center,
+              child: Text("hello"),
+            ),
+          );
+        },
+        itemCount: 10,
+        physics: ClampingScrollPhysics(),
+      )),
+    );
   }
 }

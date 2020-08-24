@@ -3,9 +3,12 @@ import 'package:flutter_app/test/bean/notie_manager_test.dart';
 import 'package:flutter_app/test/ui/Test7App_6.dart';
 import 'package:flutter_app/test/ui/Test7App_7.dart';
 import 'package:flutter_app/test/ui/Test_.dart';
+import 'package:flutter_app/test/ui/Test__1.dart';
+import 'package:flutter_app/test/ui/test1.dart';
 import 'package:flutter_app/test/ui/test2.dart';
 import 'package:flutter_app/test/ui/test3.dart';
 import 'package:flutter_app/test/ui/test4HttpNet.dart';
+import 'package:flutter_app/test/ui/testTiko.dart';
 import 'package:flutter_app/test/ui/test_nest_scroll_view2.dart';
 import 'package:flutter_app/zhihu_demo/ui/BottomNavigationPage.dart';
 import 'package:flutter_app/zhihu_demo/ui/ZhiHuMainPage.dart';
@@ -108,7 +111,7 @@ class _MainApp extends State<MainApp> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       switch (index) {
         case 0:
-          return Test7App7();
+          return MyTest11App();
         case 1:
           return Test2App();
         case 2:

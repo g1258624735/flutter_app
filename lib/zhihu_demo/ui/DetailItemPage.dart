@@ -71,6 +71,8 @@ class _DetailItemPageState extends State<DetailItemPage>  with AutomaticKeepAliv
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    print("gxj=build");
     if (listData.length==0) {
       return Center(child: CircularProgressIndicator());
     } else {
