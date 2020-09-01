@@ -1,4 +1,3 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/widget/diff_scale_text.dart';
@@ -64,10 +63,10 @@ class _FlareAnimationState extends State  {
         child: new Container(
           width: size,
           height: size,
-          child: new FlareActor("file/flare_flutter_logo_.flr",
-              alignment: Alignment.topCenter,
-              fit: BoxFit.fill,
-              animation: "Placeholder"),
+//          child: new FlareAnimation("file/flare_flutter_logo_.flr",
+//              alignment: Alignment.topCenter,
+//              fit: BoxFit.fill,
+//              animation: "Placeholder"),
         ),
       ),
       Align(
@@ -75,10 +74,10 @@ class _FlareAnimationState extends State  {
         child: new Container(
           width: size,
           height: size,
-          child: new FlareActor("file/Space-Demo.flr",
-              alignment: Alignment.topCenter,
-              fit: BoxFit.fill,
-              animation: "Placeholder"),
+//          child: new FlareActor("file/Space-Demo.flr",
+//              alignment: Alignment.topCenter,
+//              fit: BoxFit.fill,
+//              animation: "Placeholder"),
         ),
       )
     ]);

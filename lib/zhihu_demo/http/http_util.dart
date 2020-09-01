@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'package:http/http.dart' as http;
-
 import 'dart:convert';
 
 import 'api.dart';
@@ -72,31 +70,31 @@ class HttpUtil {
       Map<String, String> headerMap = headers == null ? new Map() : headers;
       Map<String, String> paramMap = params == null ? new Map() : params;
 
-
-      http.Response res;
-      if (POST == method) {
-        print("POST:URL="+url);
-        print("POST:BODY="+paramMap.toString());
-        res = await http.post(url, headers: headerMap, body: paramMap);
-      } else {
-        print("GET:URL="+url);
-        res = await http.get(url, headers: headerMap);
-      }
-
-      if (res.statusCode != 200) {
-        errorMsg = "网络请求错误,状态码:" + res.statusCode.toString() ;
-
-        _handError(errorCallback, errorMsg);
-        return;
-      }
-
-      //以下部分可以根据自己业务需求封装,这里是errorCode>=0则为请求成功,data里的是数据部分
-      //记得Map中的泛型为dynamic
-      Map<String, dynamic> map = json.decode(res.body);
-
-      errorCode = map['errorCode'];
-      errorMsg = map['errorMsg'];
-      data = map['data'];
+//
+//      http.Response res;
+//      if (POST == method) {
+//        print("POST:URL="+url);
+//        print("POST:BODY="+paramMap.toString());
+//        res = await http.post(url, headers: headerMap, body: paramMap);
+//      } else {
+//        print("GET:URL="+url);
+//        res = await http.get(url, headers: headerMap);
+//      }
+//
+//      if (res.statusCode != 200) {
+//        errorMsg = "网络请求错误,状态码:" + res.statusCode.toString() ;
+//
+//        _handError(errorCallback, errorMsg);
+//        return;
+//      }
+//
+//      //以下部分可以根据自己业务需求封装,这里是errorCode>=0则为请求成功,data里的是数据部分
+//      //记得Map中的泛型为dynamic
+//      Map<String, dynamic> map = json.decode(res.body);
+//
+//      errorCode = map['errorCode'];
+//      errorMsg = map['errorMsg'];
+//      data = map['data'];
 
 
       // callback返回data,数据类型为dynamic

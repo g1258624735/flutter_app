@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:flutter_app/zhihu_demo/widget/webview.dart';
 
 //文章详情界面
 class ArticleDetailWebPage extends StatefulWidget {
@@ -21,17 +21,17 @@ class ArticleDetailWebPage extends StatefulWidget {
 class ArticleDetailPageState extends State<ArticleDetailWebPage> {
 //  bool isLoad = true;
 //
- final flutterWebViewPlugin = FlutterWebviewPlugin();
+// final flutterWebViewPlugin = FlutterWebviewPlugin();
 
 
  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    flutterWebViewPlugin.onDestroy.listen((_){
-
-      Navigator.of(context).pop();
-    });
+//    flutterWebViewPlugin.onDestroy.listen((_){
+//
+//      Navigator.of(context).pop();
+//    });
   }
 //
 //  @override
@@ -54,14 +54,14 @@ class ArticleDetailPageState extends State<ArticleDetailWebPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WebviewScaffold(
-      url: widget.url,
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      withZoom: false,
-      withLocalStorage: true,
-      withJavascript: true,
-    );
+//    return WebView(
+//      url: widget.url,
+//      appBar: AppBar(
+//        title: Text(widget.title),
+//      ),
+//      withZoom: false,
+//      withLocalStorage: true,
+//      withJavascript: true,
+//    );
   }
 }

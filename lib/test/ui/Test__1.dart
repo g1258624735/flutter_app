@@ -2,9 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/ui/refresh_indicator.dart';
-import 'package:flutter_app/test/widget/custom_refresh_controller.dart';
-import 'package:flutter_app/test/widget/custom_refresh_page.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 ///测试滑动嵌套控件  NestedScrollView  下拉刷新
 class MyTest11App extends StatelessWidget {
@@ -31,15 +28,19 @@ class HomeState extends State<Home> {
   TabController tabController;
   ScrollController scrollController = new ScrollController();
   ScrollController scrollControllerParent = new ScrollController();
+  bool isPinned = true;
 
   @override
   void initState() {
     super.initState();
     tabControllerParent = TabController(length: 3, vsync: ScrollableState());
     tabController = TabController(length: 3, vsync: ScrollableState());
+    tabControllerParent.animateTo(1);
     scrollController.addListener(() {
       double offset = scrollController.position.pixels;
-      scrollControllerParent.jumpTo(offset);
+      if (offset != null && offset <= 100 && offset >= -100) {
+        scrollControllerParent.jumpTo(offset);
+      }
     });
   }
 
@@ -47,36 +48,45 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(children: <Widget>[
-      CustomScrollView(
-        controller: scrollControllerParent,
-        slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: Container(
-                color: Colors.white,
-                height: 1920 * 2.0,
-                alignment: Alignment.topCenter,
-                child: TabBar(
-                  unselectedLabelColor: Colors.blue[100],
-                  indicator: BoxDecoration(color: Colors.lightBlue),
-                  controller: tabControllerParent,
-                  tabs: <Widget>[
-                    Tab(
-                      text: "页面一",
-                    ),
-                    Tab(
-                      text: "页面二",
-                    ),
-                    Tab(
-                      text: "页面三",
-                    )
-                  ],
-                )),
-          )
-        ],
-      ),
       TabBarView(
         controller: tabControllerParent,
         children: <Widget>[getView(), getView(), getView()],
+      ),
+      Container(
+        height: 48,
+        child: CustomScrollView(
+          controller: scrollControllerParent,
+          physics: NeverScrollableScrollPhysics(),
+          slivers: <Widget>[
+            SliverPersistentHeader(
+                pinned: false,
+                delegate: _SliverDelegate(
+                    minHeight: 48.0,
+                    maxHeight: 48.0,
+                    child:Container(
+                        color: Colors.green,
+                        height: 48,
+                        child: TabBar(
+                          unselectedLabelColor: Colors.blue[100],
+                          indicator: BoxDecoration(color: Colors.lightBlue),
+                          controller: tabControllerParent,
+                          tabs: <Widget>[
+                            Tab(
+                              text: "Home",
+                            ),
+                            Tab(
+                              text: "Fav",
+                            ),
+                            Tab(
+                              text: "Star",
+                            )
+                          ],
+                        )))),
+        SliverToBoxAdapter(child: SizedBox(
+              height: 1920 * 2.0,
+            ))
+          ],
+        ),
       ),
     ]));
   }
@@ -144,7 +154,7 @@ class HomeState extends State<Home> {
 //                        ],
 //                      )))),
           SliverPadding(
-              padding: EdgeInsets.only(top: 48),
+              padding: EdgeInsets.only(top: 0),
               sliver: SliverList(
                   delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
@@ -158,27 +168,11 @@ class HomeState extends State<Home> {
               }, childCount: 4))),
           SliverPersistentHeader(
               pinned: true,
-              delegate: _SliverDelegate(
-                  minHeight: 50.0,
-                  maxHeight: 50.0,
-                  child: Container(
-                      color: Colors.white,
-                      child: TabBar(
-                        unselectedLabelColor: Colors.blue[100],
-                        indicator: BoxDecoration(color: Colors.lightBlue),
-                        controller: tabController,
-                        tabs: <Widget>[
-                          Tab(
-                            text: "Home",
-                          ),
-                          Tab(
-                            text: "Fav",
-                          ),
-                          Tab(
-                            text: "Star",
-                          )
-                        ],
-                      ))))
+              delegate: MySliverAppBar(
+                  controller: tabController,
+                  scrollBack: (bool isPinned) {
+                    this.isPinned = isPinned;
+                  }))
         ];
       },
       body: Container(
@@ -284,4 +278,54 @@ class DummyList extends StatelessWidget {
       )),
     );
   }
+}
+
+class MySliverAppBar extends SliverPersistentHeaderDelegate {
+  TabController controller;
+  Function scrollBack;
+
+  MySliverAppBar({this.controller, this.scrollBack});
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    print("shrinkOffset=" +
+        shrinkOffset.toString() +
+        "|overlapsContent=" +
+        overlapsContent.toString());
+    if (scrollBack != null) {
+      if (shrinkOffset > 0 && shrinkOffset <= 48) {
+        scrollBack(false);
+      } else {
+        scrollBack(true);
+      }
+    }
+    return Container(
+        height: 48,
+        child: TabBar(
+          controller: controller,
+          unselectedLabelColor: Colors.blue[100],
+          indicator: BoxDecoration(color: Colors.lightBlue),
+          tabs: <Widget>[
+            Tab(
+              text: "页面一",
+            ),
+            Tab(
+              text: "页面二",
+            ),
+            Tab(
+              text: "页面三",
+            )
+          ],
+        ));
+  }
+
+  @override
+  double get maxExtent => 48;
+
+  @override
+  double get minExtent => 48;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => false;
 }

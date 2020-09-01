@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   GlobalKey key = GlobalKey();
-  double value=0;
+  double value = 0;
 
   @override
   void initState() {
@@ -40,9 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
 //        paintWidthWithTextStyle(TextStyle(fontSize: 16), "测试测试测试").toString());
 //    _count = mNoticeManagerTest.count;
     myTimer = Timer.periodic(Duration(milliseconds: 500), (timer) {
-      value =value+3;
-      setState(() {
-      });
+      value = value + 3;
+      setState(() {});
     });
   }
 
@@ -136,16 +135,50 @@ class _MyHomePageState extends State<MyHomePage> {
           RaisedButton(
               onPressed: () {
 //                showDialog(context: context, child: PayNewOrderLoseDialog());
-              setState(() {
-                value =value+3;
-              });
+                setState(() {
+                  value = value + 3;
+                });
               },
               child: Text("移动动画")),
           Container(
               child: Transform.translate(
             offset: Offset(value, 0.0),
-            child: Text("动画移动效果",key:key,),
-          ))
+            child: Text(
+              "动画移动效果",
+              key: key,
+            ),
+          )),
+          Container(
+              child: Image.network(
+                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598595196330&di=1a9a0abd2a8565bcc2cbf8d1d3486627&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201601%2F26%2F20160126224805_GVjW3.jpeg",
+                frameBuilder: (BuildContext context, Widget child, int frame,
+                    bool wasSynchronouslyLoaded) {
+                  if (wasSynchronouslyLoaded) {
+                    return child;
+                  }
+                  return AnimatedOpacity(
+                    child: child,
+                    opacity: frame == null ? 0 : 1,
+                    duration: const Duration(seconds: 3),
+                    curve: Curves.easeOut,
+                  );
+                },
+                repeat: ImageRepeat.noRepeat,
+              ),
+              color: Colors.green,
+              height: 60,
+              width: 60),
+          Material(
+              child: Ink.image(
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                  child: Text(
+                    "我是图片",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  image: NetworkImage(
+                      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598595196330&di=1a9a0abd2a8565bcc2cbf8d1d3486627&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201601%2F26%2F20160126224805_GVjW3.jpeg"))),
         ]),
       ),
     );

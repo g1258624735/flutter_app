@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:http/http.dart' as http;
+//import 'package:http/http.dart' as http;
 
 import 'dart:convert';
 
-import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api.dart';
 
@@ -77,48 +77,48 @@ class HttpUtil {
 
 
 
-      //统一添加cookie(写在这是不是也有些不优雅)
-      SharedPreferences sp = await SharedPreferences.getInstance();
-      String cookie = sp.get("cookie");
-      if(cookie==null || cookie.length==0){
-      }else{
-        headerMap['Cookie'] = cookie;
-      }
+//      //统一添加cookie(写在这是不是也有些不优雅)
+//      SharedPreferences sp = await SharedPreferences.getInstance();
+//      String cookie = sp.get("cookie");
+//      if(cookie==null || cookie.length==0){
+//      }else{
+//        headerMap['Cookie'] = cookie;
+//      }
 
 
 
-      http.Response res;
-      if (POST == method) {
-        print("POST:URL="+url);
-        print("POST:BODY="+paramMap.toString());
-        res = await http.post(url, headers: headerMap, body: paramMap);
-      } else {
-        print("GET:URL="+url);
-        res = await http.get(url, headers: headerMap);
-      }
+//      http.Response res;
+//      if (POST == method) {
+//        print("POST:URL="+url);
+//        print("POST:BODY="+paramMap.toString());
+//        res = await http.post(url, headers: headerMap, body: paramMap);
+//      } else {
+//        print("GET:URL="+url);
+//        res = await http.get(url, headers: headerMap);
+//      }
 
-      if (res.statusCode != 200) {
-        errorMsg = "网络请求错误,状态码:" + res.statusCode.toString();
-
-        _handError(errorCallback, errorMsg);
-        return;
-      }
+//      if (res.statusCode != 200) {
+//        errorMsg = "网络请求错误,状态码:" + res.statusCode.toString();
+//
+//        _handError(errorCallback, errorMsg);
+//        return;
+//      }
 
       //以下部分可以根据自己业务需求封装,这里是errorCode>=0则为请求成功,data里的是数据部分
-      //记得Map中的泛型为dynamic
-      Map<String, dynamic> map = json.decode(res.body);
+//      //记得Map中的泛型为dynamic
+//      Map<String, dynamic> map = json.decode(res.body);
+//
+//      errorCode = map['errorCode'];
+//      errorMsg = map['errorMsg'];
+//      data = map['data'];
 
-      errorCode = map['errorCode'];
-      errorMsg = map['errorMsg'];
-      data = map['data'];
 
-
-      //报存登录接口的cookie,写在这里有些不优雅(0-0)
-      if(url.contains(Api.LOGIN)){
-        SharedPreferences sp = await SharedPreferences.getInstance();
-        sp.setString("cookie", res.headers['set-cookie']);
-
-      }
+//      //报存登录接口的cookie,写在这里有些不优雅(0-0)
+//      if(url.contains(Api.LOGIN)){
+//        SharedPreferences sp = await SharedPreferences.getInstance();
+//        sp.setString("cookie", res.headers['set-cookie']);
+//
+//      }
 
 
 
