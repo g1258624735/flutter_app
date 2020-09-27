@@ -40,10 +40,12 @@ class Test7_1_App extends State<Test7App> {
           title: new Text("基本测试控件3"),
           bottom: TabBar(
             tabs: list.map((t) {
-              return Container(child: Text(t,style: TextStyle(color: Colors.white))) ;
+              return Text(t);
             }).toList(),
             controller: _TabControl,
             indicatorColor: Colors.white,
+            unselectedLabelColor: Colors.green,
+            labelColor: Colors.white,
             isScrollable: true,
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorWeight: 3.0,
