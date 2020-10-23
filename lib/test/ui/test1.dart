@@ -25,7 +25,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Timer myTimer;
   final StreamController _streamController = StreamController<int>();
   final ScrollController _scrollController = ScrollController();
-  final ScrollController _scrollController_2 = ScrollController();
+  final PageController _scrollControllerPage = PageController();
+  final ScrollController _scrollControllerSc = ScrollController();
   int _count = 0;
 
   //全局增加
@@ -35,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   GlobalKey key = GlobalKey();
   double value = 0;
+  bool isLoad = false;
 
   @override
   void initState() {
@@ -42,12 +44,21 @@ class _MyHomePageState extends State<MyHomePage> {
 //    print(
 //        paintWidthWithTextStyle(TextStyle(fontSize: 16), "测试测试测试").toString());
 //    _count = mNoticeManagerTest.count;
-    myTimer = Timer.periodic(Duration(milliseconds: 500), (timer) {
-      value = value + 3;
-      setState(() {});
-    });
-    _scrollController.addListener(() {
-      _scrollController_2.jumpTo(_scrollController.position.pixels);
+//    myTimer = Timer.periodic(Duration(milliseconds: 500), (timer) {
+//      value = value + 3;
+//      setState(() {});
+//    });
+//    _scrollControllerSc.jumpTo(30);
+    _scrollControllerPage
+      ..addListener(() {
+        double _scrollValue = _scrollControllerPage.offset /
+            _scrollControllerPage.position.maxScrollExtent;
+        print(_scrollValue);
+        _scrollControllerSc
+            .jumpTo(30-(_scrollValue == null ? 0 : _scrollValue) * 30);
+      });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollControllerSc.jumpTo(30);
     });
   }
 
@@ -63,183 +74,213 @@ class _MyHomePageState extends State<MyHomePage> {
     mNoticeManagerTest = Provider.of<NoticeManagerTest>(context, listen: false);
     print("刷新了");
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text(widget.title),
-        ),
-        body: Stack(
-          children: [
-//            CustomScrollView(controller: _scrollController_2,slivers: [
-//              SliverToBoxAdapter(
-//                  child: Container(
-//                      width: double.infinity,
-//                      height: 500,
-//                      child: Image.asset("assets/image/share.png",fit: BoxFit.fitWidth,),
-//                  )),
-//              SliverToBoxAdapter(
-//                  child: Container(
-//                height: 1080,
-//              ))
-//            ]),
-            Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/image/share.png"))),
-                child: CustomScrollView(
-                  controller: _scrollController,
-                  slivers: [
-                    SliverToBoxAdapter(
-                        child: Container(
-                      child:
-                          new Column(mainAxisSize: MainAxisSize.min, children: <
-                              Widget>[
-                        new Text(
-                          'You have pushed the button this many times:',
-                        ),
-                        new Text(
-                          '${mNoticeManagerTest.count}',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        RaisedButton(
-                            onPressed: _incrementCounter,
-                            child: Text("全局刷新增加")),
-                        //局部刷新控件
-                        Consumer<NoticeManagerTest>(
-                            builder: (context, timerModel, _) {
-                          return Text(
-                            "局部刷新${timerModel.count}",
-                            overflow: TextOverflow.ellipsis,
-                          );
-                        }),
-                        RaisedButton(
-                            onPressed: _incrementCounter,
-                            child: Text("局部刷新增加")),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Container(
-                              color: Colors.green,
-                              width: 50,
-                              height: 20,
-                            ),
-                            Container(color: Colors.red, width: 50, height: 20),
-                            Container(color: Colors.blue, width: 50, height: 20)
-                          ],
-                        ),
-                        Container(
-                            width: 40,
-                            child: Text(
-                              "测试测试测试",
-                              softWrap: true,
-                              style: TextStyle(fontSize: 16),
-                            )),
-                        Row(
-                          children: <Widget>[
-                            Container(
-                                width: 160,
-                                height: 82,
-                                color: Colors.green,
-                                child: Image.asset(
-                                    "assets/image/bg_youhuiquan_you02_sel_s.png",
-                                    color: Colors.white,
-                                    fit: BoxFit.fill)),
-                            Container(
-                                width: 82,
-                                height: 82,
-                                color: Colors.green,
-                                margin: EdgeInsets.only(top: 10),
-                                child: Icon(
-                                    IconData(0xe615, fontFamily: 'aliIcon'),
-                                    color: Colors.red,
-                                    size: 82))
-                          ],
-                        ),
-                        Text("0xe611", style: TextStyle(fontFamily: 'aliIcon')),
-                        RaisedButton(
-                            onPressed: () {
-                              showThisDialog((state) {
-                                if (state != null && state == "start") {
+      appBar: new AppBar(
+        title: new Text(widget.title),
+      ),
+      body: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          SliverToBoxAdapter(
+              child: Container(
+            child:
+                new Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+              new Text(
+                'You have pushed the button this many times:',
+              ),
+              new Text(
+                '${mNoticeManagerTest.count}',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              RaisedButton(onPressed: _incrementCounter, child: Text("全局刷新增加")),
+              //局部刷新控件
+              Consumer<NoticeManagerTest>(builder: (context, timerModel, _) {
+                return Text(
+                  "局部刷新${timerModel.count}",
+                  overflow: TextOverflow.ellipsis,
+                );
+              }),
+              RaisedButton(onPressed: _incrementCounter, child: Text("局部刷新增加")),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Container(
+                    color: Colors.green,
+                    width: 50,
+                    height: 20,
+                  ),
+                  Container(color: Colors.red, width: 50, height: 20),
+                  Container(color: Colors.blue, width: 50, height: 20)
+                ],
+              ),
+              Container(
+                  width: 40,
+                  child: Text(
+                    "测试测试测试",
+                    softWrap: true,
+                    style: TextStyle(fontSize: 16),
+                  )),
+              Row(
+                children: <Widget>[
+                  Container(
+                      width: 160,
+                      height: 82,
+                      color: Colors.green,
+                      child: Image.asset(
+                          "assets/image/bg_youhuiquan_you02_sel_s.png",
+                          color: Colors.white,
+                          fit: BoxFit.fill)),
+                  Container(
+                      width: 82,
+                      height: 82,
+                      color: Colors.green,
+                      margin: EdgeInsets.only(top: 10),
+                      child: Icon(IconData(0xe615, fontFamily: 'aliIcon'),
+                          color: Colors.red, size: 82))
+                ],
+              ),
+              Text("0xe611", style: TextStyle(fontFamily: 'aliIcon')),
+              RaisedButton(
+                  onPressed: () {
+                    showThisDialog((state) {
+                      if (state != null && state == "start") {
 //                    Toast.toast(context,
 //                        msg: "开始倒计时开始 ", position: ToastPostion.bottom,showTime: 1);
-                                  print("开始倒计时");
-                                } else if (state != null && state == "end") {
+                        print("开始倒计时");
+                      } else if (state != null && state == "end") {
 //                    Toast.toast(context,
 //                        msg: "开始倒计时结束 ", position: ToastPostion.bottom,showTime: 1);
-                                  print("结束倒计时");
-                                  Navigator.of(context).pop();
-                                }
-                              });
-                            },
-                            child: Text("显示弹窗")),
-                        RaisedButton(
-                            onPressed: () {
+                        print("结束倒计时");
+                        Navigator.of(context).pop();
+                      }
+                    });
+                  },
+                  child: Text("显示弹窗")),
+              RaisedButton(
+                  onPressed: () {
 //                showDialog(context: context, child: PayNewOrderLoseDialog());
-                              setState(() {
-                                value = value + 3;
-                              });
-                            },
-                            child: Text("移动动画")),
-                        Container(
-                            child: Transform.translate(
-                          offset: Offset(value, 0.0),
-                          child: Text(
-                            "动画移动效果",
-                            key: key,
-                          ),
-                        )),
-                        Container(
-                            child: Image.network(
-                              "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598595196330&di=1a9a0abd2a8565bcc2cbf8d1d3486627&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201601%2F26%2F20160126224805_GVjW3.jpeg",
-                              frameBuilder: (BuildContext context, Widget child,
-                                  int frame, bool wasSynchronouslyLoaded) {
-                                if (wasSynchronouslyLoaded) {
-                                  return child;
-                                }
-                                return AnimatedOpacity(
-                                  child: child,
-                                  opacity: frame == null ? 0 : 1,
-                                  duration: const Duration(seconds: 3),
-                                  curve: Curves.easeOut,
-                                );
-                              },
-                              repeat: ImageRepeat.noRepeat,
-                            ),
-                            color: Colors.green,
-                            height: 60,
-                            width: 60),
-                        Material(
-                            child: Ink.image(
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
-                                child: Text(
-                                  "我是图片",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                image: NetworkImage(
-                                    "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598595196330&di=1a9a0abd2a8565bcc2cbf8d1d3486627&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201601%2F26%2F20160126224805_GVjW3.jpeg"))),
-                        Container(
-                            child: StreamBuilder<int>(
-                                stream: _streamController.stream,
-                                initialData: 0,
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<int> snapshot) {
-                                  return Text("数据刷新：${snapshot.data}");
-                                })),
-                        RaisedButton(
-                            onPressed: () {
+                    setState(() {
+                      value = value + 3;
+                    });
+                  },
+                  child: Text("移动动画")),
+              Container(
+                  child: Transform.translate(
+                offset: Offset(value, 0.0),
+                child: Text(
+                  "动画移动效果",
+                  key: key,
+                ),
+              )),
+              Container(
+                  child: Image.network(
+                    "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598595196330&di=1a9a0abd2a8565bcc2cbf8d1d3486627&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201601%2F26%2F20160126224805_GVjW3.jpeg",
+                    frameBuilder: (BuildContext context, Widget child,
+                        int frame, bool wasSynchronouslyLoaded) {
+                      if (wasSynchronouslyLoaded) {
+                        return child;
+                      }
+                      return AnimatedOpacity(
+                        child: child,
+                        opacity: frame == null ? 0 : 1,
+                        duration: const Duration(seconds: 3),
+                        curve: Curves.easeOut,
+                      );
+                    },
+                    repeat: ImageRepeat.noRepeat,
+                  ),
+                  color: Colors.green,
+                  height: 60,
+                  width: 60),
+              Material(
+                  child: Ink.image(
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                      child: Text(
+                        "我是图片",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      image: NetworkImage(
+                          "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598595196330&di=1a9a0abd2a8565bcc2cbf8d1d3486627&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201601%2F26%2F20160126224805_GVjW3.jpeg"))),
+              Container(
+                  child: StreamBuilder<int>(
+                      stream: _streamController.stream,
+                      initialData: 0,
+                      builder:
+                          (BuildContext context, AsyncSnapshot<int> snapshot) {
+                        return Text("数据刷新：${snapshot.data}");
+                      })),
+              RaisedButton(
+                  onPressed: () {
 //                showDialog(context: context, child: PayNewOrderLoseDialog());
-                              setState(() {
-                                _streamController.add(_count++);
-                              });
-                            },
-                            child: Text("局部刷新界面-StreamBuilder")),
+                    setState(() {
+                      _streamController.add(_count++);
+                    });
+                  },
+                  child: Text("局部刷新界面-StreamBuilder")),
+              Container(
+                  height: 40,
+                  margin: EdgeInsets.only(left: 20, right: 20),
+                  child: PageView(
+                    controller: _scrollControllerPage,
+                    children: [
+                      Container(
+                        color: Colors.blue,
+                        width: double.infinity,
+                        height: 40,
+                        alignment: Alignment.center,
+                        child: Text("page1"),
+                      ),
+                      Container(
+                        color: Colors.green,
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        height: 40,
+                        child: Text("page2"),
+                      )
+                    ],
+                  )),
 
-                      ]),
-                    )),
-                  ],
-                )),
-          ],
-        ));
+              Container(
+                  width: 60,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(3)),
+                    color: Colors.black12,
+                  ),
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 12),
+                  child: CustomScrollView(
+                    controller: _scrollControllerSc,
+                    scrollDirection: Axis.horizontal,
+                    slivers: [
+                      SliverToBoxAdapter(
+                          child: SizedBox(
+                        width: 30,
+                      )),
+                      SliverToBoxAdapter(
+                          child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(3)),
+                          color: Colors.green,
+                        ),
+                        width: 30,
+                        height: 6,
+                        child: Text(""),
+                      )),
+                      SliverToBoxAdapter(
+                          child: SizedBox(
+                        width: 240,
+                      ))
+                    ],
+                  )),
+              SizedBox(
+                height: 80,
+              )
+            ]),
+          )),
+        ],
+      ),
+    );
   }
 
   ///显示带动画弹窗
