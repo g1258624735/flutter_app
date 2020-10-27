@@ -9,6 +9,7 @@ import 'package:flutter_app/test/ui/test4HttpNet.dart';
 import 'package:flutter_app/test/ui/testTiko.dart';
 import 'package:flutter_app/zhihu_demo/ui/BottomNavigationPage.dart';
 import 'package:flutter_app/zhihu_demo/ui/ZhiHuMainPage.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'test/ui/Test5App.dart';
@@ -47,6 +48,14 @@ class _MainApp extends State<MainApp> {
   Widget build(BuildContext context) {
     return new MaterialApp(
         title: 'Startup Name Generator',
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate
+        ],
+        supportedLocales: [
+          const Locale("zh", "CH"),
+          const Locale("en", "US")
+        ],
         theme: new ThemeData(
           primarySwatch: Colors.blueGrey,
           accentColor: Colors.red,

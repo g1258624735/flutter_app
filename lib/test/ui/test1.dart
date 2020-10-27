@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/bean/notie_manager_test.dart';
 import 'package:flutter_app/test/widget/pay_new_order_lose_dialog.dart';
+import 'package:flutter_cupertino_date_picker_fork/flutter_cupertino_date_picker_fork.dart';
 import 'package:provider/provider.dart';
 
 class MyAppTest1 extends StatelessWidget {
@@ -20,13 +22,14 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin{
   NoticeManagerTest mNoticeManagerTest;
   Timer myTimer;
   final StreamController _streamController = StreamController<int>();
   final ScrollController _scrollController = ScrollController();
   final PageController _scrollControllerPage = PageController();
   final ScrollController _scrollControllerSc = ScrollController();
+  final GlobalKey anchorKey = GlobalKey();
   int _count = 0;
 
   //全局增加
@@ -36,8 +39,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   GlobalKey key = GlobalKey();
   double value = 0;
+  double valueScale = 0;
   bool isLoad = false;
-
+  AnimationController controller;
+  Animation animation;
   @override
   void initState() {
     super.initState();
@@ -55,11 +60,44 @@ class _MyHomePageState extends State<MyHomePage> {
             _scrollControllerPage.position.maxScrollExtent;
         print(_scrollValue);
         _scrollControllerSc
-            .jumpTo(30-(_scrollValue == null ? 0 : _scrollValue) * 30);
+            .jumpTo(30 - (_scrollValue == null ? 0 : _scrollValue) * 30);
       });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollControllerSc.jumpTo(30);
     });
+
+    controller =
+        AnimationController(duration: const Duration(seconds: 1), vsync: this);
+    controller.addListener(() {
+      setState(() {
+        valueScale  =animation.value;
+      });
+    });
+    //动画开始、结束、向前移动或向后移动时会调用StatusListener
+    controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        //动画从 controller.forward() 正向执行 结束时会回调此方法
+      } else if (status == AnimationStatus.dismissed) {
+        //动画从 controller.reverse() 反向执行 结束时会回调此方法
+//        print("status is dismissed");
+      } else if (status == AnimationStatus.forward) {
+//        print("status is forward");
+        //执行 controller.forward() 会回调此状态
+      } else if (status == AnimationStatus.reverse) {
+        //执行 controller.reverse() 会回调此状态
+//        print("status is reverse");
+      }
+
+    });
+    animation = CurvedAnimation(parent: controller, curve: Curves.bounceOut );
+    animation.addStatusListener((status){
+      if (status == AnimationStatus.completed){
+        controller.reverse(from: 1.0);
+      }else if (status == AnimationStatus.dismissed){
+        controller.forward(from: 0.0);
+      }
+    });
+    controller.forward(from: 0.0);
   }
 
   @override
@@ -273,6 +311,87 @@ class _MyHomePageState extends State<MyHomePage> {
                       ))
                     ],
                   )),
+              RaisedButton(
+                  onPressed: () {
+//                        showDialog(context: context, child: MyTimePicker());
+                    showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        builder: (context) {
+                          return MyTimePicker();
+                        });
+//                    __showStartDatePicker(context);
+                  },
+                  child: Text("显示时间控件")),
+              GestureDetector(
+                child: Container(
+                  child: Text("我是测试文本我是测试文本我是测试文本我是测试文本我是测试文本", key: anchorKey),
+                  height: 40,
+                  width: double.infinity,
+                ),
+                onLongPressStart: (detail) {
+                  RenderBox renderBox =
+                      anchorKey.currentContext.findRenderObject();
+                  var offset = renderBox
+                      .localToGlobal(Offset(0.0, renderBox.size.height));
+                  final RelativeRect position = RelativeRect.fromLTRB(
+                      detail.globalPosition.dx, //取点击位置坐弹出x坐标
+                      offset.dy, //取text高度做弹出y坐标（这样弹出就不会遮挡文本）
+                      detail.globalPosition.dx,
+                      offset.dy);
+                  showMenu(
+                      context: context,
+                      position: position,
+                      items: <PopupMenuEntry<String>>[
+                        PopupMenuItem(
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              new Text('复制'),
+                            ],
+                          ),
+                          value: '复制',
+                        )
+                      ]);
+                },
+              ),
+              RaisedButton(onPressed: () {}, child: Text("测试")),
+//              Container(
+//                child: Image.asset("assets/image/now_to_use.gif",
+//                    fit: BoxFit.cover),
+//                color: Colors.white,
+//              ),
+
+//              ScaleTransition(
+//                  //设置动画的缩放中心
+//                  alignment: Alignment.center,
+//                  //动画控制器
+//                  scale: controller,
+//                  //将要执行动画的子view
+//                  child: Container(
+//                    width: 66,
+//                    height: 30,
+//                    alignment: Alignment.center,
+//                    decoration: BoxDecoration(
+//                        color: Colors.red,
+//                        borderRadius: BorderRadius.all(Radius.circular(19))),
+//                    child: Text(
+//                      "去使用",
+//                      style: TextStyle(color: Colors.white, fontSize: 14),
+//                    ),
+//                  )),
+                Container(
+                    width: 56+valueScale*10,
+                    height: 26+valueScale*10,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.all(Radius.circular(19))),
+                    child: Text(
+                      "去使用",
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                  ),
               SizedBox(
                 height: 80,
               )
@@ -309,5 +428,104 @@ class _MyHomePageState extends State<MyHomePage> {
         textDirection: TextDirection.ltr)
       ..layout(minWidth: 0, maxWidth: double.infinity);
     return textPainter.size.width;
+  }
+}
+
+// 开始时间
+void __showStartDatePicker(BuildContext context) {
+  var startTime = DateTime.parse("2018-02-27");
+  var _endTime = DateTime.parse("2020-10-27");
+  DatePicker.showDatePicker(
+    context,
+    pickerTheme: DateTimePickerTheme(
+      itemTextStyle: TextStyle(color: Color(0xff000000), fontSize: 16),
+      confirm: Text('完成', style: TextStyle(color: Color(0xff4A90E2))),
+      cancel: Text('取消', style: TextStyle(color: Color(0xff4A90E2))),
+    ),
+    // minDateTime: _endTime.add(Duration(days: -30)),
+    maxDateTime: _endTime,
+    initialDateTime: _endTime.add(Duration(days: -30)),
+    dateFormat: 'yyyy年,MM月,d日',
+    onConfirm: (data, List<int> index) {},
+  );
+}
+
+class MyTimePicker extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyTimePickerState();
+  }
+}
+
+class MyTimePickerState extends State {
+  @override
+  Widget build(BuildContext context) {
+//    var startTime = DateTime.parse("2018-02-27");
+    var _endTime = DateTime.parse("2020-10-27");
+    var _dateTime = DateTime.now();
+
+    return Material(
+        //创建透明层
+        type: MaterialType.transparency, //透明类型
+        child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(8))),
+            height: 280,
+            child: Column(
+              children: [
+                Padding(
+                    padding: EdgeInsets.only(left: 12, top: 18, right: 12),
+                    child: Row(
+                      children: [
+                        Text(
+                          "月份选择",
+                          style:
+                              TextStyle(fontSize: 16, color: Color(0xff060918)),
+                        ),
+                        SizedBox(
+                          width: 32,
+                        ),
+                        Text(
+                          "自定义",
+                          style:
+                              TextStyle(fontSize: 16, color: Color(0xff060918)),
+                        ),
+                        Spacer(),
+                      ],
+                    )),
+                DatePickerWidget(
+                    onMonthChangeStartWithFirstDate: false,
+                    pickerTheme: DateTimePickerTheme(
+                      titleHeight: 0,
+                      itemTextStyle:
+                          TextStyle(color: Color(0xff000000), fontSize: 16),
+                    ),
+                    maxDateTime: _endTime,
+                    initialDateTime: _endTime.add(Duration(days: -30)),
+                    dateFormat: 'yyyy年,MM月,d日',
+                    onConfirm: (data, List<int> index) {})
+              ],
+            )));
+
+//      child: CalendarDatePicker(
+//          firstDate: DateTime(2020, 5, 1),
+//          lastDate: DateTime(2020, 12, 31),
+//          initialDate: _dateTime,
+//          onDateChanged: (date) {
+//            setState(() {
+//              _dateTime = date;
+//            });
+//          }),
+////
+//          child: CalendarDatePicker(
+//          firstDate: DateTime(2020, 5, 1),
+//          lastDate: DateTime(2020, 12, 31),
+//          initialDate: _dateTime,
+//          onDateChanged: (date) {
+//            setState(() {
+//              _dateTime = date;
+//            });
+//          }),
   }
 }
