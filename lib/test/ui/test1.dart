@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/bean/notie_manager_test.dart';
 import 'package:flutter_app/test/widget/pay_new_order_lose_dialog.dart';
+import 'package:flutter_app/test/widget/round_underline_tab_indicator.dart';
 import 'package:flutter_cupertino_date_picker_fork/flutter_cupertino_date_picker_fork.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,8 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin{
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   NoticeManagerTest mNoticeManagerTest;
   Timer myTimer;
   final StreamController _streamController = StreamController<int>();
@@ -43,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   bool isLoad = false;
   AnimationController controller;
   Animation animation;
+
   @override
   void initState() {
     super.initState();
@@ -67,10 +70,10 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     });
 
     controller =
-        AnimationController(duration: const Duration(seconds: 1), vsync: this);
+        AnimationController(duration: const Duration(seconds: 1));
     controller.addListener(() {
       setState(() {
-        valueScale  =animation.value;
+        valueScale = animation.value;
       });
     });
     //动画开始、结束、向前移动或向后移动时会调用StatusListener
@@ -87,13 +90,12 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         //执行 controller.reverse() 会回调此状态
 //        print("status is reverse");
       }
-
     });
-    animation = CurvedAnimation(parent: controller, curve: Curves.bounceOut );
-    animation.addStatusListener((status){
-      if (status == AnimationStatus.completed){
+    animation = CurvedAnimation(parent: controller, curve: Curves.bounceOut);
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
         controller.reverse(from: 1.0);
-      }else if (status == AnimationStatus.dismissed){
+      } else if (status == AnimationStatus.dismissed) {
         controller.forward(from: 0.0);
       }
     });
@@ -122,6 +124,36 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
               child: Container(
             child:
                 new Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(left: 16, right: 16),
+                    width: 200,
+                    height: 48,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "¥",
+                        ),
+                        Container(
+                          // color: AppUIConfig.colors.red,
+                            margin: EdgeInsets.only(left: 8),
+                            width: 140,
+                            child: TextField(
+                              // keyboardType: TextInputType.number,
+                              textAlignVertical: TextAlignVertical.bottom,
+                              inputFormatters: [
+
+                              ],
+                              decoration: InputDecoration(
+                                hintText: '请输入',
+
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide.none),
+                              ),
+                            ))
+                      ],
+                    ),
+                  ),
               new Text(
                 'You have pushed the button this many times:',
               ),
@@ -339,6 +371,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                       offset.dy, //取text高度做弹出y坐标（这样弹出就不会遮挡文本）
                       detail.globalPosition.dx,
                       offset.dy);
+//                  print(detail.globalPosition.dx+"|"+offset.dy+"|"+)
                   showMenu(
                       context: context,
                       position: position,
@@ -356,11 +389,10 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                 },
               ),
               RaisedButton(onPressed: () {}, child: Text("测试")),
-//              Container(
-//                child: Image.asset("assets/image/now_to_use.gif",
-//                    fit: BoxFit.cover),
-//                color: Colors.white,
-//              ),
+              Container(
+                child: Image.asset("assets/image/2356.gif", fit: BoxFit.cover),
+                color: Colors.white,
+              ),
 
 //              ScaleTransition(
 //                  //设置动画的缩放中心
@@ -380,18 +412,18 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 //                      style: TextStyle(color: Colors.white, fontSize: 14),
 //                    ),
 //                  )),
-                Container(
-                    width: 56+valueScale*10,
-                    height: 26+valueScale*10,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.all(Radius.circular(19))),
-                    child: Text(
-                      "去使用",
-                      style: TextStyle(color: Colors.white, fontSize: 14),
-                    ),
-                  ),
+              Container(
+                width: 56 + valueScale * 10,
+                height: 26 + valueScale * 10,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.all(Radius.circular(19))),
+                child: Text(
+                  "去使用",
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+              ),
               SizedBox(
                 height: 80,
               )
@@ -458,74 +490,204 @@ class MyTimePicker extends StatefulWidget {
 }
 
 class MyTimePickerState extends State {
+  TabController tabController =
+      TabController(length: 2, vsync: ScrollableState());
+  int _selectIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController.addListener(() {
+      _selectIndex = tabController.index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-//    var startTime = DateTime.parse("2018-02-27");
-    var _endTime = DateTime.parse("2020-10-27");
-    var _dateTime = DateTime.now();
-
     return Material(
         //创建透明层
         type: MaterialType.transparency, //透明类型
         child: Container(
+            height: 420,
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(8))),
-            height: 280,
             child: Column(
               children: [
                 Padding(
-                    padding: EdgeInsets.only(left: 12, top: 18, right: 12),
+                    padding: EdgeInsets.only(left: 6, top: 18, right: 6),
                     child: Row(
                       children: [
-                        Text(
-                          "月份选择",
-                          style:
-                              TextStyle(fontSize: 16, color: Color(0xff060918)),
-                        ),
-                        SizedBox(
-                          width: 32,
-                        ),
-                        Text(
-                          "自定义",
-                          style:
-                              TextStyle(fontSize: 16, color: Color(0xff060918)),
-                        ),
+                        Expanded(
+                            child: Container(
+                          height: 44,
+                          alignment: Alignment.centerLeft,
+                          child: TabBar(
+                            labelColor: Color(0xff060918),
+                            unselectedLabelColor: Color(0xff060918),
+                            isScrollable: true,
+                            controller: tabController,
+                            indicatorColor: Color(0xffF43333),
+                            indicatorWeight: 3.0,
+                            indicator: RoundUnderlineTabIndicator(
+                              borderSide: BorderSide(
+                                width: 3,
+                                color: Color(0xffF43333),
+                              ),
+                            ),
+                            labelPadding: EdgeInsets.only(left: 0, right: 0),
+                            indicatorSize: TabBarIndicatorSize.label,
+                            labelStyle: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                            unselectedLabelStyle: TextStyle(fontSize: 16),
+                            indicatorPadding: EdgeInsets.only(
+                              left: 10.0,
+                              right: 10.0,
+                              bottom: 5.0,
+                            ),
+                            tabs: _getListTab(),
+                          ),
+                        )),
                         Spacer(),
                       ],
                     )),
-                DatePickerWidget(
-                    onMonthChangeStartWithFirstDate: false,
-                    pickerTheme: DateTimePickerTheme(
-                      titleHeight: 0,
-                      itemTextStyle:
-                          TextStyle(color: Color(0xff000000), fontSize: 16),
-                    ),
-                    maxDateTime: _endTime,
-                    initialDateTime: _endTime.add(Duration(days: -30)),
-                    dateFormat: 'yyyy年,MM月,d日',
-                    onConfirm: (data, List<int> index) {})
+                Divider(
+                  height: 1,
+                  color: Color(0xfff1f1f1),
+                ),
+                Expanded(
+                    child: Container(
+                  child: TabBarView(
+                    controller: tabController,
+                    children: [_getMonthSelectWidget(), _getCustomWidget()],
+                  ),
+                  width: double.infinity,
+                ))
               ],
             )));
+  }
 
-//      child: CalendarDatePicker(
-//          firstDate: DateTime(2020, 5, 1),
-//          lastDate: DateTime(2020, 12, 31),
-//          initialDate: _dateTime,
-//          onDateChanged: (date) {
-//            setState(() {
-//              _dateTime = date;
-//            });
-//          }),
-////
-//          child: CalendarDatePicker(
-//          firstDate: DateTime(2020, 5, 1),
-//          lastDate: DateTime(2020, 12, 31),
-//          initialDate: _dateTime,
-//          onDateChanged: (date) {
-//            setState(() {
-//              _dateTime = date;
-//            });
-//          }),
+  ///月份选择
+  Widget _getMonthSelectWidget() {
+    return Column(children: [
+      Expanded(child: _getTimeWidget()),
+      _getSureButton(),
+      SizedBox(
+        height: 8,
+      )
+    ]);
+  }
+
+  ///自定义
+  Widget _getCustomWidget() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Padding(
+          padding: EdgeInsets.only(top: 24),
+          child: Row(
+            children: [
+              Padding(
+                child: _getButton("今天"),
+                padding: EdgeInsets.only(right: 12, left: 12),
+              ),
+              Padding(
+                child: _getButton("近7天"),
+                padding: EdgeInsets.only(right: 12),
+              ),
+              Padding(
+                child: _getButton("近30天"),
+                padding: EdgeInsets.only(right: 12),
+              ),
+            ],
+          )),
+      Padding(
+          child: Text(
+            "自定义",
+            style: TextStyle(fontSize: 12, color: Color(0xff8D8D99)),
+          ),
+          padding: EdgeInsets.only(top: 24, bottom: 16, left: 16)),
+      Row(
+        children: [
+          Padding(
+            child: _getButton("2020年9月2日"),
+            padding: EdgeInsets.only(right: 38, left: 12),
+          ),
+          Padding(
+            child: _getButton("2020年9月2日"),
+            padding: EdgeInsets.only(right: 12),
+          ),
+        ],
+      ),
+      _getTimeWidget(),
+      Spacer(),
+      _getSureButton(),
+      SizedBox(
+        height: 8,
+      )
+    ]);
+  }
+
+  Widget _getSureButton() {
+    return Container(
+        width: double.infinity,
+        height: 40,
+        margin: EdgeInsets.only(left: 12, right: 12),
+        child: RaisedButton(
+          elevation: 0,
+          onPressed: () {},
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          color: Color(0xffF43333),
+          child: Text(
+            "确认",
+            style: TextStyle(fontSize: 16, color: Colors.white),
+          ),
+        ));
+  }
+
+  Container _getButton(String text) {
+    return Container(
+        height: 30,
+        child: RaisedButton(
+          elevation: 0,
+          onPressed: () {},
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          color: Color(0xffF3F2F5),
+          child: Text(
+            text,
+            style: TextStyle(fontSize: 14, color: Color(0xff8D8D99)),
+          ),
+        ));
+  }
+
+  Widget _getTimeWidget() {
+    var _endTime = DateTime.parse("2020-10-27");
+    return Padding(
+        padding: EdgeInsets.only(top: 28, bottom: 10),
+        child: DatePickerWidget(
+            onMonthChangeStartWithFirstDate: false,
+            pickerTheme: DateTimePickerTheme(
+              titleHeight: 0,
+              pickerHeight: 100,
+              itemTextStyle: TextStyle(color: Color(0xff000000), fontSize: 16),
+            ),
+            maxDateTime: _endTime,
+            initialDateTime: _endTime.add(Duration(days: -30)),
+            dateFormat: 'yyyy年,MM月,d日',
+            onConfirm: (data, List<int> index) {}));
+  }
+
+  List<Widget> _getListTab() {
+    List<Widget> listWidget = List();
+    for (var i = 0; i < 2; i++) {
+      listWidget.add(Container(
+          margin: EdgeInsets.only(left: 10, right: 10, bottom: 4),
+          child: Text(
+            i == 0 ? "月份选择" : "自定义",
+          )));
+    }
+    return listWidget;
   }
 }

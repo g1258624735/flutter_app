@@ -181,11 +181,11 @@ class MyRefreshIndicatorState extends State<MyRefreshIndicator> with TickerProvi
   @override
   void initState() {
     super.initState();
-    _positionController = AnimationController(vsync: this);
+    _positionController = AnimationController();
     _positionFactor = _positionController.drive(_kDragSizeFactorLimitTween);
     _value = _positionController.drive(_threeQuarterTween); // The "value" of the circular progress indicator during a drag.
 
-    _scaleController = AnimationController(vsync: this);
+    _scaleController = AnimationController();
     _scaleFactor = _scaleController.drive(_oneToZeroTween);
   }
 

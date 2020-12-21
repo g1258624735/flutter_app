@@ -39,8 +39,7 @@ class _TikTokFavoriteAnimationIconState
     _animationController = AnimationController(
       lowerBound: 0,
       upperBound: 1,
-      duration: Duration(milliseconds: 1600),
-      vsync: this,
+      duration: Duration(milliseconds: 1600)
     );
 
     _animationController.addListener(() {
@@ -95,10 +94,10 @@ class _TikTokFavoriteAnimationIconState
       blendMode: BlendMode.srcATop,
       shaderCallback: (Rect bounds) => RadialGradient(
         center: Alignment.topLeft.add(Alignment(0.66, 0.66)),
-        colors: [
+       /* colors: [
           Color(0xffEF6F6F),
           Color(0xffF03E3E),
-        ],
+        ],*/
       ).createShader(bounds),
     );
     Widget body = Transform.rotate(

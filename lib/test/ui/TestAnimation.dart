@@ -17,8 +17,7 @@ class _MyHomePageState extends State<TestAnimation>
   void initState() {
     super.initState();
     controller = AnimationController(
-        duration: const Duration(milliseconds: 2000),
-        vsync: this); //初始化，动画控制器,每个动画都是执行2秒
+        duration: const Duration(milliseconds: 2000)); //初始化，动画控制器,每个动画都是执行2秒
   }
 
   @override

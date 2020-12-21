@@ -26,7 +26,7 @@ class _FloatState extends State with SingleTickerProviderStateMixin {
     //vsync参数，存在vsync时会防止屏幕外动画（动画的UI不在当前屏幕时）消耗不必要的资源
     //duration 动画的时长，这里设置的 seconds: 2 为2秒，当然也可以设置毫秒 milliseconds：2000.
     controller = AnimationController(
-        duration: const Duration(milliseconds: 800), vsync: this);
+        duration: const Duration(milliseconds: 800));
     //动画开始、结束、向前移动或向后移动时会调用StatusListener
     controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {

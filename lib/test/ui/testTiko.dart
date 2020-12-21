@@ -123,8 +123,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     super.initState();
     controller = AnimationController(
         ////创建 Animation对象
-        duration: Duration(milliseconds: 2000), //时长
-        vsync: this);
+        duration: Duration(milliseconds: 2000));
     controller.repeat(reverse: false);
     movement = Tween(
       begin: 0.0,
@@ -147,8 +146,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     });
     controllerNormal = AnimationController(
         ////创建 Animation对象
-        duration: Duration(milliseconds: 2000), //时长
-        vsync: this);
+        duration: Duration(milliseconds: 2000));
     controllerNormal.repeat(reverse: false);
     movementNormal = Tween(
       begin: 0.0,

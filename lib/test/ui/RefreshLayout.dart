@@ -180,7 +180,7 @@ class RefreshLayoutState extends State<RefreshLayout>
   void initState() {
     super.initState();
 
-    _positionController = new AnimationController(vsync: this);
+    _positionController = new AnimationController();
     _positionFactor = new Tween<double>(
       begin: 0.0,
       end: _kDragSizeFactorLimit,
@@ -191,7 +191,7 @@ class RefreshLayoutState extends State<RefreshLayout>
       end: 0.75,
     ).animate(_positionController);
 
-    _scaleController = new AnimationController(vsync: this);
+    _scaleController = new AnimationController();
     _scaleFactor = new Tween<double>(
       begin: 1.0,
       end: 0.0,
@@ -517,13 +517,14 @@ class RefreshLayoutState extends State<RefreshLayout>
             gradient: new LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: <Color>[
-              Color(0x40ffffff),
-              Color(0x99ffffff),
-              Color(0xBBffffff),
-              Color(0xDDffffff),
-              Colors.white
-            ])),
+            //     colors: <Color>[
+            //   Color(0x40ffffff),
+            //   Color(0x99ffffff),
+            //   Color(0xBBffffff),
+            //   Color(0xDDffffff),
+            //   Colors.white
+            // ]
+            )),
         child: SizedBox(
           height: 60.0,
           child: Center(

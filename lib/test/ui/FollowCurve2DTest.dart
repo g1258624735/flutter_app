@@ -100,7 +100,7 @@ class _FollowCurve2DState extends State<FollowCurve2D>
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(duration: widget.duration, vsync: this);
+    controller = AnimationController(duration: widget.duration);
     animation = CurvedAnimation(parent: controller, curve: widget.curve);
     // Have the controller repeat indefinitely.  If you want it to "bounce" back
     // and forth, set the reverse parameter to true.
