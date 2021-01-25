@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/ui/refresh_indicator.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 
 ///测试滑动嵌套控件  NestedScrollView  下拉刷新
@@ -26,7 +25,6 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   TabController tabController;
   ScrollController scrollController = new ScrollController();
-  EasyRefreshController _controller = EasyRefreshController();
 
   @override
   void initState() {

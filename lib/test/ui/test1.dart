@@ -6,6 +6,7 @@ import 'package:flutter_app/test/bean/notie_manager_test.dart';
 import 'package:flutter_app/test/widget/pay_new_order_lose_dialog.dart';
 import 'package:flutter_app/test/widget/round_underline_tab_indicator.dart';
 import 'package:flutter_cupertino_date_picker_fork/flutter_cupertino_date_picker_fork.dart';
+// import 'package:image_pickers/image_pickers.dart';
 import 'package:provider/provider.dart';
 
 class MyAppTest1 extends StatelessWidget {
@@ -69,8 +70,7 @@ class _MyHomePageState extends State<MyHomePage>
       _scrollControllerSc.jumpTo(30);
     });
 
-    controller =
-        AnimationController(duration: const Duration(seconds: 1));
+    controller = AnimationController(duration: const Duration(seconds: 1));
     controller.addListener(() {
       setState(() {
         valueScale = animation.value;
@@ -124,36 +124,33 @@ class _MyHomePageState extends State<MyHomePage>
               child: Container(
             child:
                 new Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(left: 16, right: 16),
-                    width: 200,
-                    height: 48,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "¥",
-                        ),
-                        Container(
-                          // color: AppUIConfig.colors.red,
-                            margin: EdgeInsets.only(left: 8),
-                            width: 140,
-                            child: TextField(
-                              // keyboardType: TextInputType.number,
-                              textAlignVertical: TextAlignVertical.bottom,
-                              inputFormatters: [
-
-                              ],
-                              decoration: InputDecoration(
-                                hintText: '请输入',
-
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide.none),
-                              ),
-                            ))
-                      ],
+              Container(
+                padding: EdgeInsets.only(left: 16, right: 16),
+                width: 200,
+                height: 48,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "¥",
                     ),
-                  ),
+                    Container(
+                        // color: AppUIConfig.colors.red,
+                        margin: EdgeInsets.only(left: 8),
+                        width: 140,
+                        child: TextField(
+                          // keyboardType: TextInputType.number,
+                          textAlignVertical: TextAlignVertical.bottom,
+                          inputFormatters: [],
+                          decoration: InputDecoration(
+                            hintText: '请输入',
+                            border:
+                                OutlineInputBorder(borderSide: BorderSide.none),
+                          ),
+                        ))
+                  ],
+                ),
+              ),
               new Text(
                 'You have pushed the button this many times:',
               ),
@@ -426,7 +423,14 @@ class _MyHomePageState extends State<MyHomePage>
               ),
               SizedBox(
                 height: 80,
-              )
+              ),
+              RaisedButton(
+                onPressed: () {
+                  ///选择多张图片 Select multiple images
+
+                },
+                child: Text("选择图片"),
+              ),
             ]),
           )),
         ],

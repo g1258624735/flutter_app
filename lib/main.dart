@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/bean/notie_manager_test.dart';
-import 'package:flutter_app/test/ui/FollowCurve2DTest.dart';
-import 'package:flutter_app/test/ui/Test9App.dart';
-import 'package:flutter_app/test/ui/Test__1.dart';
+import 'package:flutter_app/test/ui/Test10App.dart';
+import 'package:flutter_app/test/ui/Test11App.dart';
+import 'package:flutter_app/test/ui/Test12App.dart';
+import 'package:flutter_app/test/ui/Test13App.dart';
+import 'package:flutter_app/test/ui/chart_app.dart';
+import 'package:flutter_app/test/ui/chart_demo.dart';
+import 'package:flutter_app/test/ui/scan_page.dart';
 import 'package:flutter_app/test/ui/test1.dart';
-import 'package:flutter_app/test/ui/test1_1.dart';
 import 'package:flutter_app/test/ui/test2.dart';
 import 'package:flutter_app/test/ui/test3.dart';
 import 'package:flutter_app/test/ui/test4HttpNet.dart';
-import 'package:flutter_app/test/ui/testTiko.dart';
 import 'package:flutter_app/zhihu_demo/ui/BottomNavigationPage.dart';
 import 'package:flutter_app/zhihu_demo/ui/ZhiHuMainPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -43,9 +45,10 @@ class _MainApp extends State<MainApp> {
     "测试BottomNavigation",
     "仿知乎demo",
     "测试动画",
+    "测试二维码扫描",
   ];
   final TextStyle _biggerFont = new TextStyle(fontSize: 18.0);
-
+  GlobalKey<ScaffoldState> scaffoldKey;
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -54,10 +57,7 @@ class _MainApp extends State<MainApp> {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
-        supportedLocales: [
-          const Locale("zh", "CH"),
-          const Locale("en", "US")
-        ],
+        supportedLocales: [const Locale("zh", "CH"), const Locale("en", "US")],
         theme: new ThemeData(
           primarySwatch: Colors.blueGrey,
           accentColor: Colors.red,
@@ -72,8 +72,6 @@ class _MainApp extends State<MainApp> {
         ));
   }
 
-  GlobalKey<ScaffoldState> scaffoldKey;
-
   @override
   void initState() {
     super.initState();
@@ -82,35 +80,33 @@ class _MainApp extends State<MainApp> {
 
   Widget _buildSuggestions(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () {
-        return Future.delayed(Duration(milliseconds: 600), () {
-
-        });
-      },
-      child: ListView.builder(
-      physics: ClampingScrollPhysics(),
-      padding: const EdgeInsets.all(16.0),
-      controller: ScrollController(keepScrollOffset:false ),
-      itemBuilder: (context, i) {
-        if (i.isOdd) return new Divider();
-        final index = i ~/ 2;
-        return _buildRow(context, list[index], index);
-      },
-      itemCount: list.length * 2,
+        onRefresh: () {
+          return Future.delayed(Duration(milliseconds: 600), () {});
+        },
+        child: ListView.builder(
+          physics: ClampingScrollPhysics(),
+          padding: const EdgeInsets.all(16.0),
+          controller: ScrollController(keepScrollOffset: false),
+          itemBuilder: (context, i) {
+            if (i.isOdd) return new Divider();
+            final index = i ~/ 2;
+            return _buildRow(context, list[index], index);
+          },
+          itemCount: list.length * 2,
 //      scrollDirection: Axis.horizontal,//水平布局
-    ));
+        ));
   }
 
   Widget _buildRow(BuildContext context, String pair, int index) {
     return ListTile(
-          title: new Text(
-            pair,
-            style: _biggerFont,
-          ),
-          onTap: () {
-            _toNextPage(context, index);
-          },
-        );
+      title: new Text(
+        pair,
+        style: _biggerFont,
+      ),
+      onTap: () {
+        _toNextPage(context, index);
+      },
+    );
   }
 
   ///跳转到下一页
@@ -119,7 +115,7 @@ class _MainApp extends State<MainApp> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       switch (index) {
         case 0:
-          return Test9App();
+          return ChartApp();
         case 1:
           return Test2App();
         case 2:
@@ -138,6 +134,8 @@ class _MainApp extends State<MainApp> {
           return ZhiHuMainPage();
         case 9:
           return TestAnimation();
+        case 10:
+          return ScanPage();
       }
     }));
   }
