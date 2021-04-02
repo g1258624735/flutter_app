@@ -1,7 +1,4 @@
 //import 'package:fluttertoast/fluttertoast.dart';
-
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/ui/ToastPostion.dart';
@@ -15,6 +12,9 @@ class Test7App_1 extends StatefulWidget {
 }
 
 class _Test7App_1_1 extends State {
+  bool show = false;
+  OverlayEntry _overlayEntry;
+
   @override
   void initState() {
     super.initState();
@@ -25,12 +25,50 @@ class _Test7App_1_1 extends State {
   _onClick(BuildContext context, String value) {
     setState(() {
       this._groupValue = value;
-
 //      scaffoldKey.currentState.showSnackBar(
 //        SnackBar(content: Text(_groupValue),duration:Duration(milliseconds: 50)));
       Scaffold.of(context).showSnackBar(SnackBar(
           content: Text(_groupValue), duration: Duration(milliseconds: 50)));
     });
+  }
+
+  void _toggleOverlay() {
+    if (!show) {
+      _showOverlay();
+    } else {
+      _hideOverlay();
+    }
+    show = !show;
+  }
+
+  OverlayEntry _createOverlayEntry() => OverlayEntry(
+        builder: (BuildContext context) => UnconstrainedBox(
+          child: CompositedTransformFollower(
+            link: LayerLink(),
+            child: Material(
+              child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(5)),
+                  padding: const EdgeInsets.all(10),
+                  width: 50,
+                  child: const Text(
+                    "toly",
+                    style: TextStyle(color: Colors.white),
+                  )),
+            ),
+          ),
+        ),
+      );
+
+  void _showOverlay() {
+    _overlayEntry = _createOverlayEntry();
+    Overlay.of(context).insert(_overlayEntry);
+  }
+
+  void _hideOverlay() {
+    _overlayEntry?.remove();
   }
 
   @override
@@ -194,7 +232,8 @@ class _Test7App_1_1 extends State {
             onSelected: (String str) {},
           )
         ],
-      )
+      ),
+      RaisedButton(child: Text("测试Overlay"), onPressed: () {_toggleOverlay();})
     ]);
   }
 

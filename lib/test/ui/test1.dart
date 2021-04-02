@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/test/bean/notie_manager_test.dart';
 import 'package:flutter_app/test/widget/pay_new_order_lose_dialog.dart';
 import 'package:flutter_app/test/widget/round_underline_tab_indicator.dart';
+import 'package:flutter_app/test/widget/triangle_painter.dart';
+import 'package:flutter_app/test/widget/triangle_painter_half.dart';
 import 'package:flutter_cupertino_date_picker_fork/flutter_cupertino_date_picker_fork.dart';
+
 // import 'package:image_pickers/image_pickers.dart';
 import 'package:provider/provider.dart';
 
@@ -70,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage>
       _scrollControllerSc.jumpTo(30);
     });
 
-    controller = AnimationController(duration: const Duration(seconds: 1));
+    controller = AnimationController(duration: const Duration(seconds: 1),vsync: this);
     controller.addListener(() {
       setState(() {
         valueScale = animation.value;
@@ -427,10 +430,14 @@ class _MyHomePageState extends State<MyHomePage>
               RaisedButton(
                 onPressed: () {
                   ///选择多张图片 Select multiple images
-
                 },
                 child: Text("选择图片"),
               ),
+              Container(
+                  width: 20,
+                  height: 20,
+                  margin: EdgeInsets.only(top: 24),
+                  child: CustomPaint(painter: TrianglePainterHalf(Colors.black)))
             ]),
           )),
         ],

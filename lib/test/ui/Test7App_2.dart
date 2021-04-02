@@ -19,7 +19,7 @@ class _Test7App_2_1 extends State with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     controller = AnimationController(
-        duration: const Duration(milliseconds: 1000));
+        duration: const Duration(milliseconds: 1000),vsync: this);
     controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         //AnimationStatus.completed 动画在结束时停止的状态

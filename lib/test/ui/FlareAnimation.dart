@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/test/widget/diff_scale_text.dart';
 import 'package:flutter_app/test/widget/mole_widget.dart';
 
-
 ///测试  Flare 动画   有别于线性动画和自定义动画
 class FlareAnimation extends StatefulWidget {
   @override
@@ -12,7 +11,7 @@ class FlareAnimation extends StatefulWidget {
   }
 }
 
-class _FlareAnimationState extends State  {
+class _FlareAnimationState extends State {
   bool hadInit = false;
 
   String text = "";
@@ -27,22 +26,25 @@ class _FlareAnimationState extends State  {
     hadInit = true;
 
     ///防止多次进入
-    new Future.delayed(const Duration( milliseconds: 500), () {
-      setState(() {
-        text = "Welcome";
-        fontSize = 40;
-      });
+    new Future.delayed(const Duration(milliseconds: 500), () {
+      if (mounted) {
+        setState(() {
+          text = "Welcome";
+          fontSize = 40;
+        });
+      }
     });
     new Future.delayed(const Duration(seconds: 1, milliseconds: 500), () {
-      setState(() {
-        text = "GSYGithubApp";
-        fontSize = 40;
-      });
+      if (mounted) {
+        setState(() {
+          text = "GSYGithubApp";
+          fontSize = 40;
+        });
+      }
     });
-    new Future.delayed(const Duration(seconds: 2, milliseconds: 500), () {
-
-    });
+    new Future.delayed(const Duration(seconds: 2, milliseconds: 500), () {});
   }
+
   @override
   Widget build(BuildContext context) {
     double size = 200;
@@ -51,14 +53,14 @@ class _FlareAnimationState extends State  {
         alignment: Alignment(0.0, 0.3),
         child: DiffScaleText(
           text: text,
-          textStyle: TextStyle(fontSize: fontSize,color: Colors.green
-          ),
+          textStyle: TextStyle(fontSize: fontSize, color: Colors.green),
         ),
-      ), Align(
+      ),
+      Align(
         alignment: Alignment(0.0, 0.8),
         child: Mole(),
       ),
-       Align(
+      Align(
         alignment: Alignment.bottomCenter,
         child: new Container(
           width: size,

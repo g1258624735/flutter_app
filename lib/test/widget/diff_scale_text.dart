@@ -24,7 +24,7 @@ class _DiffScaleTextState extends State<DiffScaleText>
   void initState() {
     super.initState();
     _animationController =
-        AnimationController(duration: Duration(milliseconds: 400));
+        AnimationController(duration: Duration(milliseconds: 400),vsync: this);
     _animationController.addStatusListener((status) {});
   }
 

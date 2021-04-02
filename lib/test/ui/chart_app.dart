@@ -53,7 +53,7 @@ class _MyHomePageState extends State<_MyHomePage> {
           SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: SfCartesianChart(
-                  primaryXAxis: CategoryAxis(arrangeByIndex: true),
+                  primaryXAxis: CategoryAxis(arrangeByIndex: true,isVisible: true),
                   // Chart title
                   title: ChartTitle(text: 'Half yearly sales analysis'),
                   // Enable legend
@@ -69,6 +69,10 @@ class _MyHomePageState extends State<_MyHomePage> {
                         isVisibleInLegend: true,
                         // Enable data label
                         dataLabelSettings: DataLabelSettings(
+                            connectorLineSettings: ConnectorLineSettings(
+                                color: Colors.red,
+                                width: 20
+                            ),
                             isVisible: true,
                             labelAlignment: ChartDataLabelAlignment.auto))
                   ])),

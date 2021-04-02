@@ -19,7 +19,7 @@ class _TestStatefulState extends State<CircleStateful>
     super.initState();
     controller = AnimationController(
         ////创建 Animation对象
-        duration: Duration(milliseconds: 8000));
+        duration: Duration(milliseconds: 8000),vsync: this);
     var tween = Tween(begin: 0.0, end: 1.0);
     animation = tween.animate(controller)
       ..addListener(() {
