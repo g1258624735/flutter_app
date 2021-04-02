@@ -1,4 +1,3 @@
-//import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/test/ui/ToastPostion.dart';
@@ -14,13 +13,14 @@ class Test7App_1 extends StatefulWidget {
 class _Test7App_1_1 extends State {
   bool show = false;
   OverlayEntry _overlayEntry;
+  final LayerLink layerLink = LayerLink();
+  String _groupValue = "";
+  String _value = "One";
 
   @override
   void initState() {
     super.initState();
   }
-
-  String _groupValue = "";
 
   _onClick(BuildContext context, String value) {
     setState(() {
@@ -44,7 +44,8 @@ class _Test7App_1_1 extends State {
   OverlayEntry _createOverlayEntry() => OverlayEntry(
         builder: (BuildContext context) => UnconstrainedBox(
           child: CompositedTransformFollower(
-            link: LayerLink(),
+            showWhenUnlinked: true,
+            link: layerLink,
             child: Material(
               child: Container(
                   alignment: Alignment.center,
@@ -52,9 +53,9 @@ class _Test7App_1_1 extends State {
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(5)),
                   padding: const EdgeInsets.all(10),
-                  width: 50,
+                  width: 100,
                   child: const Text(
-                    "toly",
+                    "我是伴随悬浮窗",
                     style: TextStyle(color: Colors.white),
                   )),
             ),
@@ -72,8 +73,13 @@ class _Test7App_1_1 extends State {
   }
 
   @override
+  void dispose() {
+    _hideOverlay();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new Column(children: <Widget>[
       Text("第一个控件"),
       Row(
@@ -233,11 +239,15 @@ class _Test7App_1_1 extends State {
           )
         ],
       ),
-      RaisedButton(child: Text("测试Overlay"), onPressed: () {_toggleOverlay();})
+      CompositedTransformTarget(
+          link: layerLink,
+          child: RaisedButton(
+              child: Text("测试伴随悬浮组件Overlay"),
+              onPressed: () {
+                _toggleOverlay();
+              }))
     ]);
   }
-
-  String _value = "One";
 }
 
 class _Drawle extends StatelessWidget {
