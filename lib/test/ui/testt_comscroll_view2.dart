@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/test/ui/refresh_indicator.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 
-///测试滑动嵌套控件  NestedScrollView  下拉刷新
-class TestNestScrollView2App extends StatelessWidget {
+///测试滑动嵌套控件  ComScrollView  下拉刷新
+class TestComScrollView2App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("测试NestedScrollView滑动不同步问题"),),
+      appBar: AppBar(
+        title: Text("测试ComScrollView滑动不同步问题"),
+      ),
       body: Home(),
     );
   }
@@ -23,13 +25,13 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
-  TabController tabController = TabController(length: 3, vsync: ScrollableState());
+  TabController tabController =
+      TabController(length: 3, vsync: ScrollableState());
   ScrollController scrollController = new ScrollController();
 
   @override
   void initState() {
     super.initState();
-
     scrollController.addListener(() {
 //      print(scrollController.position.pixels.toString() +
 //          "|" +
@@ -49,14 +51,11 @@ class HomeState extends State<Home> {
   }
 
   Widget getView() {
-    return  getChildView();
+    return getChildView();
   }
 
   Widget getChildView() {
-    return NestedScrollView(
-        controller: scrollController,
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
+    return CustomScrollView(controller: scrollController, slivers: <Widget>[
 //            SliverAppBar(
 //              leading: IconButton(
 //                icon: Image.asset("assets/images/back_white.png"),
@@ -77,43 +76,79 @@ class HomeState extends State<Home> {
 //                background: DummySection(color: Colors.red,height: 40,),
 //              ),
 //            ),
-            SliverList(
-                delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-              return Card(
-                child: Container(
-                  height: 100.0,
-                  alignment: Alignment.center,
-                  child: Text("hello"),
-                ),
-              );
-            }, childCount: 10)),
-            // SliverPersistentHeader(
-            //     pinned: true,
-            //     delegate: _SliverDelegate(
-            //         minHeight: 50.0,
-            //         maxHeight: 50.0,
-            //         child: Container(
-            //             color: Colors.white,
-            //             child: TabBar(
-            //               unselectedLabelColor: Colors.blue[100],
-            //               indicator: BoxDecoration(color: Colors.lightBlue),
-            //               controller: tabController,
-            //               tabs: <Widget>[
-            //                 Tab(
-            //                   text: "Home",
-            //                 ),
-            //                 Tab(
-            //                   text: "Fav",
-            //                 ),
-            //                 Tab(
-            //                   text: "Star",
-            //                 )
-            //               ],
-            //             ))))
-          ];
-        },
-        body:SizedBox());
+      SliverList(
+          delegate:
+              SliverChildBuilderDelegate((BuildContext context, int index) {
+        return Card(
+          child: Container(
+            height: 100.0,
+            alignment: Alignment.center,
+            child: Text("hello"),
+          ),
+        );
+      }, childCount: 10)),
+      SliverPersistentHeader(
+          pinned: true,
+          delegate: _SliverDelegate(
+              minHeight: 50.0,
+              maxHeight: 50.0,
+              child: Container(
+                  color: Colors.white,
+                  child: TabBar(
+                    unselectedLabelColor: Colors.blue[100],
+                    indicator: BoxDecoration(color: Colors.lightBlue),
+                    controller: tabController,
+                    tabs: <Widget>[
+                      Tab(
+                        text: "Home",
+                      ),
+                      Tab(
+                        text: "Fav",
+                      ),
+                      Tab(
+                        text: "Star",
+                      )
+                    ],
+                  )))),
+      SliverToBoxAdapter(
+          child: Container(
+              height: 2000,
+              child: TabBarView(
+                controller: tabController,
+                children: [
+                  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return DummySection(
+                        color: Colors.red,
+                        height: 40,
+                      );
+                    },
+                    itemCount: 10,
+                  ),
+                  ListView.builder(
+                    itemBuilder: (context, index) {
+                      return DummySection(
+                        color: Colors.blue,
+                        height: 40,
+                      );
+                    },
+                    itemCount: 10,
+                  ),
+                  ListView.builder(
+                    itemBuilder: (context, index) {
+                      return DummySection(
+                        color: Colors.green,
+                        height: 40,
+                      );
+                    },
+                    itemCount: 10,
+                  )
+                ],
+              ))),
+    ]);
+    // body: ListView(children: [Container(height: 500,color: Colors.red,)],));
   }
 }
 

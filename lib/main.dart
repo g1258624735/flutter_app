@@ -4,6 +4,7 @@ import 'package:flutter_app/test/ui/Test10App.dart';
 import 'package:flutter_app/test/ui/Test11App.dart';
 import 'package:flutter_app/test/ui/Test12App.dart';
 import 'package:flutter_app/test/ui/Test13App.dart';
+import 'package:flutter_app/test/ui/Test_.dart';
 import 'package:flutter_app/test/ui/chart_app.dart';
 import 'package:flutter_app/test/ui/chart_demo.dart';
 import 'package:flutter_app/test/ui/scan_page.dart';
@@ -12,6 +13,8 @@ import 'package:flutter_app/test/ui/test2.dart';
 import 'package:flutter_app/test/ui/test3.dart';
 import 'package:flutter_app/test/ui/test4HttpNet.dart';
 import 'package:flutter_app/test/ui/test_animition.dart';
+import 'package:flutter_app/test/ui/test_nest_scroll_view2.dart';
+import 'package:flutter_app/test/ui/testt_comscroll_view2.dart';
 import 'package:flutter_app/zhihu_demo/ui/BottomNavigationPage.dart';
 import 'package:flutter_app/zhihu_demo/ui/ZhiHuMainPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -116,7 +119,7 @@ class _MainApp extends State<MainApp> {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       switch (index) {
         case 0:
-          return TestAnimationApp();
+          return TestNestScrollView2App();
         case 1:
           return Test2App();
         case 2:
