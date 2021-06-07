@@ -31,6 +31,7 @@ dependencies:
   image_picker: 0.6.7+21
   video_player: 0.11.0
   syncfusion_flutter_charts: 18.4.35
+  flutter_barrage: 0.4.6
   #  custom_refresh_plugin:
 #    #git 方式依赖
 #    git:
