@@ -32,6 +32,7 @@ dependencies:
   video_player: 0.11.0
   syncfusion_flutter_charts: 18.4.35
   flutter_barrage: 0.4.6
+  pimp_my_button: 1.0.0
   #  custom_refresh_plugin:
 #    #git 方式依赖
 #    git:

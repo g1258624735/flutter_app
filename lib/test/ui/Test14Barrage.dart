@@ -29,7 +29,7 @@ class Test_14_BarrageState extends State<Test_14_Barrage> {
       ),
       //todo 垂直布局
       body: new Column(children: [
-        MagicBarrage()
+        Container(width: 300,child:MagicBarrage())
       ]),
     );
   }

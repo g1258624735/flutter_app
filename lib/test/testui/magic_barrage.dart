@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'barrage_widget.dart';
@@ -98,14 +99,14 @@ class MagicBarrageState extends State<MagicBarrage> {
         textDirection: TextDirection.ltr)
       ..layout(minWidth: 0, maxWidth: double.infinity);
     double width = textPainter.size.width;
-    var widthS = (MediaQuery.of(context).size.width - 48.0) * 3 / 20;
+    var widthS = (window.physicalSize.width - 48.0) * 3 / 20;
 
     var left = 0.0;
     int delayed = 0;
     if (width > widthS) {
       left = width - widthS;
       delayed =
-          left * 1000 ~/ ((MediaQuery.of(context).size.width - 48.0) / 20);
+          left * 1000 ~/ ((window.physicalSize.width - 48.0) / 20);
       print("gxj=====widthS=" +
           width.toString() +
           "|" +

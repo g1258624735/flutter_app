@@ -73,7 +73,8 @@ class _MyHomePageState extends State<MyHomePage>
       _scrollControllerSc.jumpTo(30);
     });
 
-    controller = AnimationController(duration: const Duration(seconds: 1),vsync: this);
+    controller =
+        AnimationController(duration: const Duration(seconds: 1), vsync: this);
     controller.addListener(() {
       setState(() {
         valueScale = animation.value;
@@ -389,10 +390,10 @@ class _MyHomePageState extends State<MyHomePage>
                 },
               ),
               RaisedButton(onPressed: () {}, child: Text("测试")),
-              Container(
-                child: Image.asset("assets/image/2356.gif", fit: BoxFit.cover),
-                color: Colors.white,
-              ),
+              // Container(
+              //   child: Image.asset("assets/image/2356.gif", fit: BoxFit.cover),
+              //   color: Colors.white,
+              // ),
 
 //              ScaleTransition(
 //                  //设置动画的缩放中心
@@ -413,17 +414,21 @@ class _MyHomePageState extends State<MyHomePage>
 //                    ),
 //                  )),
               Container(
-                width: 56 + valueScale * 10,
-                height: 26 + valueScale * 10,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.all(Radius.circular(19))),
-                child: Text(
-                  "去使用",
-                  style: TextStyle(color: Colors.white, fontSize: 14),
-                ),
-              ),
+                  width: 100,
+                  height: 60,
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 56 + valueScale * 10,
+                    height: 26 + valueScale * 10,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.all(Radius.circular(19))),
+                    child: Text(
+                      "去使用",
+                      style: TextStyle(color: Colors.white, fontSize: 11+3*valueScale),
+                    ),
+                  )),
               SizedBox(
                 height: 80,
               ),
@@ -437,7 +442,8 @@ class _MyHomePageState extends State<MyHomePage>
                   width: 20,
                   height: 20,
                   margin: EdgeInsets.only(top: 24),
-                  child: CustomPaint(painter: TrianglePainterHalf(Colors.black)))
+                  child:
+                      CustomPaint(painter: TrianglePainterHalf(Colors.black)))
             ]),
           )),
         ],
